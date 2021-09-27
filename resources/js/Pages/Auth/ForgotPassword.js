@@ -24,27 +24,29 @@ export default function ForgotPassword({ status }) {
         <Guest>
             <Head title="Forgot Password" />
 
-            <div className="mb-4 text-sm text-gray-500 leading-normal">
-                Forgot your password? No problem. Just let us know your email address and we will email you a password
-                reset link that will allow you to choose a new one.
+            <h1 className="md:font-semibold text-gray-600 md:text-gray-800 mb-6 text-lg md:text-2xl">Reset your password</h1>
+
+            <div className="mb-6 text-sm text-gray-600 leading-normal">
+            Enter the email address associated with your account and we'll send you a link to reset your password.
             </div>
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
-            <ValidationErrors errors={errors} />
+            <ValidationErrors   errors={errors} />
 
             <form onSubmit={submit}>
+
                 <Input
                     type="text"
                     name="email"
                     value={data.email}
-                    className="mt-1 block w-full"
+                    className="mt-2 block w-full"
                     isFocused={true}
                     handleChange={onHandleChange}
                 />
 
-                <div className="flex items-center justify-end mt-4">
-                    <Button className="ml-4" processing={processing}>
+                <div className="flex items-center justify-end mt-6">
+                    <Button className="ml-4 bg-gradient-to-br from-blue-500 to-blue-600 focus:ring-2 focus:ring-blue-300" processing={processing}>
                         Email Password Reset Link
                     </Button>
                 </div>
