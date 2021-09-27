@@ -27,6 +27,7 @@
         "tailwindcss": "^2.1.2"
     },
     "dependencies": {
-        "framer-motion": "^4.1.17"
+        "framer-motion": "^4.1.17",
+        "react-icons": "^4.2.0"
     }
 }

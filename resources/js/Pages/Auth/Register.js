@@ -3,7 +3,6 @@ import Button from '@/Components/Button';
 import Guest from '@/Layouts/Guest';
 import Input from '@/Components/Input';
 import Label from '@/Components/Label';
-import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import Checkbox from '@/Components/Checkbox';
 import ErrorMessage from '@/Components/ErrorMessage';
@@ -37,6 +36,7 @@ export default function Register() {
         post(route('register'), {
             preserveScroll: true,
             onError: (error) => {
+
                 if (error.name) {
                     inputName.start({ x: [50,-50,50,-50, 50, 0] })
                 }
