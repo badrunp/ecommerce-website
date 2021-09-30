@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Head } from '@inertiajs/inertia-react';
 import Resize from '@/Hooks/Resize';
 import { motion } from 'framer-motion';
-import Navbar from '@/Components/Navbar/Navbar';
+import Navbar from '@/Components/Dashboard/Navbar/Navbar';
 import { containerVariants } from '@/Config/variants/navbar';
 import { minSidebarHide } from '@/Config/app';
-import Sidebar from '@/Components/Sidebar/Sidebar';
+import Sidebar from '@/Components/Dashboard/Sidebar/Sidebar';
 
 
 export default function Authenticated({ children }) {
