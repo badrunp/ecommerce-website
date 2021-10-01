@@ -75,7 +75,7 @@ function NavbarRight() {
                                             <BiUser className="text-gray-600 w-5 h-5" />
                                             <span className="block">Profil</span>
                                         </Link>
-                                        <Link href={route('login')} className="text-gray-700 font-semibold py-2 w-full px-2 flex items-center space-x-3 rounded hover:bg-gray-100">
+                                        <Link href={route('logout')} method="POST" className="text-gray-700 font-semibold py-2 w-full px-2 flex items-center space-x-3 rounded hover:bg-gray-100">
                                             <IoIosLogOut className="text-gray-600 w-5 h-5" />
                                             <span className="block">Logout</span>
                                         </Link>
