@@ -15,6 +15,23 @@ const containerVariants = {
     }
 }
 
+const userDropdownVariants = {
+    hidden: {
+        opacity: 0,
+        x: 250
+    },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            type: 'spring',
+            damping: 30,
+            stiffness: 300
+        }
+    }
+}
+
 export {
-    containerVariants
+    containerVariants,
+    userDropdownVariants
 }

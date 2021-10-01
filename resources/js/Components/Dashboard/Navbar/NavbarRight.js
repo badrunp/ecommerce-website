@@ -1,27 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { IoIosLogOut, IoMdNotificationsOutline } from 'react-icons/io'
+import { IoMdNotificationsOutline } from 'react-icons/io'
 import { IoSettingsOutline } from 'react-icons/io5'
 import ButtonRoundedHover from '../../ButtonRoundedHover'
 import image from '../../../Assets/images/unnamed.jpg'
 import { Link } from '@inertiajs/inertia-react'
-import { BiUser } from 'react-icons/bi'
 import { AnimatePresence, motion } from 'framer-motion';
+import { userDropdownVariants } from '@/Config/variants/navbar'
+import { menuUserNavbarDropdown } from '@/Config/menu/dashboard/navbar'
 
-const userDropdownVariants = {
-    hidden: {
-        opacity: 0,
-        x: 250
-    },
-    visible: {
-        opacity: 1,
-        x: 0,
-        transition: {
-            type: 'spring',
-            damping: 30,
-            stiffness: 300
-        }
-    }
-}
 
 function NavbarRight() {
     const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -36,7 +22,7 @@ function NavbarRight() {
     })
 
     const handleClickWindow = (e) => {
-        if(userDropdownOpen && !refUserDropdown.current.contains(e.target)){
+        if (userDropdownOpen && !refUserDropdown.current.contains(e.target)) {
             setUserDropdownOpen(false);
         }
     }
@@ -71,14 +57,14 @@ function NavbarRight() {
                                         </div>
                                     </div>
                                     <div className="relative w-full h-auto py-4 flex flex-col space-y-1">
-                                        <Link href={route('login')} className="text-gray-700 font-semibold py-2 w-full px-2 flex items-center space-x-3 rounded hover:bg-gray-100">
-                                            <BiUser className="text-gray-600 w-5 h-5" />
-                                            <span className="block">Profil</span>
-                                        </Link>
-                                        <Link href={route('logout')} method="POST" className="text-gray-700 font-semibold py-2 w-full px-2 flex items-center space-x-3 rounded hover:bg-gray-100">
-                                            <IoIosLogOut className="text-gray-600 w-5 h-5" />
-                                            <span className="block">Logout</span>
-                                        </Link>
+                                        {
+                                            menuUserNavbarDropdown.map((item) => (
+                                                <Link href={item.link} method={item.method} className="text-gray-700 font-semibold py-2 w-full px-2 flex items-center space-x-3 rounded hover:bg-gray-100">
+                                                    <item.icon className="text-gray-600 w-5 h-5" />
+                                                    <span className="block">{item.title}</span>
+                                                </Link>
+                                            ))
+                                        }
                                     </div>
                                 </div>
                             </motion.div>
