@@ -3,15 +3,37 @@ import { IoMdNotificationsOutline } from 'react-icons/io'
 import { IoSettingsOutline } from 'react-icons/io5'
 import ButtonRoundedHover from '../../ButtonRoundedHover'
 import image from '../../../Assets/images/unnamed.jpg'
-import { Link } from '@inertiajs/inertia-react'
+import { Link, useForm } from '@inertiajs/inertia-react'
 import { AnimatePresence, motion } from 'framer-motion';
 import { userDropdownVariants } from '@/Config/variants/navbar'
 import { menuUserNavbarDropdown } from '@/Config/menu/dashboard/navbar'
 
 
+const userNotifVariants = {
+    hidden: {
+        opacity: 0,
+        y: 100,
+        transition: {
+            duration: .2
+        }
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            type: 'spring',
+            damping: 30,
+            stiffness: 300
+        }
+    }
+}
+
 function NavbarRight() {
     const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+    const [userNotifOpen, setNotifDropdownOpen] = useState(false);
     const refUserDropdown = useRef(null);
+    const refNotifDropdown = useRef(null);
+    const { post } = useForm()
 
     useEffect(() => {
         window.addEventListener('click', handleClickWindow);
@@ -25,6 +47,18 @@ function NavbarRight() {
         if (userDropdownOpen && !refUserDropdown.current.contains(e.target)) {
             setUserDropdownOpen(false);
         }
+        if (userNotifOpen && !refNotifDropdown.current.contains(e.target)) {
+            setNotifDropdownOpen(false);
+        }
+    }
+
+    const handleLogout = (e, method) => {
+        if (method != "GET") {
+            e.preventDefault()
+            post('logout', {
+                method: 'DELETE'
+            })
+        }
     }
 
     return (
@@ -32,12 +66,35 @@ function NavbarRight() {
             <ButtonRoundedHover>
                 <IoSettingsOutline className="w-5 h-5 text-gray-600" />
             </ButtonRoundedHover>
-            <ButtonRoundedHover>
-                <IoMdNotificationsOutline className="w-5 h-5 text-gray-600" />
-                <div className="absolute right-0 bottom-0 bg-red-500 rounded-full overflow-hidden h-4 w-4">
-                    <span className="block text-xs text-white">1</span>
-                </div>
-            </ButtonRoundedHover>
+            <div className="relative">
+                <ButtonRoundedHover onClick={() => setNotifDropdownOpen(!userNotifOpen)}>
+                    <IoMdNotificationsOutline className="w-5 h-5 text-gray-600" />
+                    <div className="absolute right-0 bottom-0 bg-red-500 rounded-full overflow-hidden h-4 w-4">
+                        <span className="block text-xs text-white">1</span>
+                    </div>
+                </ButtonRoundedHover>
+                <AnimatePresence exitBeforeEnter>
+                    {
+                        userNotifOpen && (
+                            <motion.div variants={userNotifVariants} initial="hidden" animate="visible" exit="hidden" className="absolute top-0 right-0 mt-14" ref={refNotifDropdown}>
+                                <div className="bg-white rounded-md shadow w-56 ">
+                                    <div className="py-2">
+                                        <div className="w-full flex flex-col justify-start items-start divide-y-2 divide-gray-200">
+                                            <div className="px-4 py-2">
+                                                <span className="block text-gray-600 text-sm">Itaque exercitationem culpa illo blanditiis nesciunt excepturi reprehenderit. Alias impedit repellendus ducimus?</span>
+                                            </div>
+                                            <div className="px-4 py-2">
+                                                <span className="block text-gray-600 text-sm">Itaque exercitationem culpa illo blanditiis nesciunt excepturi reprehenderit. Alias impedit repellendus ducimus?</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )
+                    }
+                </AnimatePresence>
+            </div>
+
             <div className="relative">
                 <button className="block rounded-full" onClick={() => setUserDropdownOpen(!userDropdownOpen)}>
                     <img src={image} alt="image profil" className="object-cover bg-center rounded-full" style={{ width: 30, height: 30 }} />
@@ -59,7 +116,7 @@ function NavbarRight() {
                                     <div className="relative w-full h-auto py-4 flex flex-col space-y-1">
                                         {
                                             menuUserNavbarDropdown.map((item) => (
-                                                <Link href={item.link} method={item.method} className="text-gray-700 font-semibold py-2 w-full px-2 flex items-center space-x-3 rounded hover:bg-gray-100">
+                                                <Link key={item.id} href={item.link} as={item.method != 'GET' ? 'button' : 'a'} onClick={(e) => handleLogout(e, item.method)} className="text-gray-700 font-semibold py-2 w-full px-2 flex items-center space-x-3 rounded hover:bg-gray-100">
                                                     <item.icon className="text-gray-600 w-5 h-5" />
                                                     <span className="block">{item.title}</span>
                                                 </Link>
