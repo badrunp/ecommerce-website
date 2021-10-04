@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 function SidebarItem({ menu, index, handleClickOpenItems, openItemSidebar }) {
     return (
-        <Link as={menu.children && menu.children.length > 0 ? 'button' : 'a'} href={route('test')} onClick={(e) => handleClickOpenItems(e, index, menu.children && menu.children.length > 0 ? 'button' : 'a')} className={`flex flex-row items-center justify-between space-x-4 py-1 my-3 w-full pr-6 ${menu.id === 2 ? 'border-r-2 border-blue-600' : ''}`}>
+        <Link as={menu.children && menu.children.length > 0 ? 'button' : 'a'} href={menu.link} onClick={(e) => handleClickOpenItems(e, index, menu.children && menu.children.length > 0 ? 'button' : 'a')} className={`flex flex-row items-center justify-between space-x-4 py-1 my-3 w-full pr-6 ${menu.id === 2 ? 'border-r-2 border-blue-600' : ''}`}>
             {menu.mt ? (
                 <menu.icon className={`w-6 h-6 flex-shrink-0 ${menu.id === 2 ? 'text-blue-600' : 'text-gray-500'} fill-current`} />
             ) : (

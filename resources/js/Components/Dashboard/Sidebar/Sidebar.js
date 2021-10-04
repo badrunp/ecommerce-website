@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { menuSidebars } from '@/Config/menu'
 import Resize from '@/Hooks/Resize';
 import { AnimatePresence, motion } from 'framer-motion'
 import Overlay from '../../Overlay';
@@ -7,6 +6,7 @@ import { menuSidebarVariants, openSidebarVariants } from '@/Config/variants/side
 import { minSidebarHide } from '@/Config/app';
 import SidebarItem from './SidebarItem';
 import SidebarSubItem from './SidebarSubItem';
+import { menuSidebars } from '@/Config/menu/dashboard/sidebar';
 
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {

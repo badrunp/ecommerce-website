@@ -28,7 +28,7 @@ export default function Authenticated({ children }) {
 
                         {/* Main */}
                         <div className="w-full relative h-screen pt-14 md:pt-16 overflow-y-auto">
-                            <div className="">
+                            <div className="px-4 md:px-6 py-4">
                                 {children}
                             </div>
                         </div>
