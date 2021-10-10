@@ -21,7 +21,7 @@ export default function Authenticated({ children, header }) {
                 <div className="flex flex-row">
 
                     {/* Sidebar */}
-                    <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+                    <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} width={width} />
 
                     <motion.div variants={containerVariants} initial={false} animate={sidebarOpen ? 'open' : 'close'} custom={width} className="w-full h-screen bg-gray-100 pl-60">
                         {/* Navbar */}
@@ -30,7 +30,7 @@ export default function Authenticated({ children, header }) {
                         {/* Main */}
                         <div className="w-full relative h-screen pt-14 md:pt-16 overflow-y-auto">
                             <div className="px-4 md:px-6 py-4">
-                                <div className="mb-5">
+                                <div className="mb-6 mt-2">
                                     <div className="flex flex-row items-center justify-start space-x-2">
                                         {
                                             url.split('/').map((item, index) => {
@@ -39,7 +39,7 @@ export default function Authenticated({ children, header }) {
                                                     return (
                                                         <>
                                                             <h4 key={index} className="text-gray-500 text-base tracking-tighter md:tracking-normal md:text-lg font-semibold">{text}</h4>
-                                                            {index != url.split('/').length -1 ? <h4 key={index} className="text-gray-600 text-xl font-semibold">{`>`}</h4> : null}
+                                                            {index != url.split('/').length -1 ? <h4 key={index} className="text-gray-600 text-sm font-semibold">{`>`}</h4> : null}
                                                         </>
                                                     )
                                                 }

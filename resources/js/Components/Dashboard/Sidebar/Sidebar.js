@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Resize from '@/Hooks/Resize';
 import { AnimatePresence, motion } from 'framer-motion'
 import Overlay from '../../Overlay';
 import { menuSidebarVariants, openSidebarVariants } from '@/Config/variants/sidebar';
@@ -9,8 +8,7 @@ import SidebarSubItem from './SidebarSubItem';
 import { menuSidebars } from '@/Config/menu/dashboard/sidebar';
 
 
-function Sidebar({ sidebarOpen, setSidebarOpen }) {
-    const { width } = Resize();
+function Sidebar({ sidebarOpen, setSidebarOpen, width }) {
     const [openItemSidebar, setOpenItemSidebar] = useState(Array(menuSidebars.length).fill(false));
 
     const handleClickOpenItems = (e, index, type) => {

@@ -12,7 +12,7 @@ function Navbar({ sidebarOpen, setSidebarOpen, width }) {
 
                 <NavbarLeft sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-                <NavbarSearch />
+                {/* <NavbarSearch /> */}
 
                 <NavbarRight />
             </div>

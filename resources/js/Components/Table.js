@@ -22,4 +22,13 @@ function Table({ columns, children }) {
     )
 }
 
+Table.Td = ({children}) => {
+    return <td className="relative py-2 md:py-3 px-6 text-gray-600 text-base">{children}</td>
+}
+
+Table.Tr = ({children, evenHoverClass = ''}) => {
+    return <tr className={`${evenHoverClass} hover:bg-gray-50`}>{children}</tr>
+}
+
+
 export default Table
