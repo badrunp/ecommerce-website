@@ -30,7 +30,7 @@ Route::get('/test', function(){
 })->name('test');
 
 Route::prefix('dashboard')->middleware(['auth'])->name('backend.')->group(function(){
-    Route::get('/', function(){
+    Route::get('/home', function(){
         return Inertia::render('Dashboard');
     })->name('dashboard');
 

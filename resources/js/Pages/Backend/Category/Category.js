@@ -3,10 +3,9 @@ import Authenticated from '@/Layouts/Authenticated'
 import React from 'react'
 
 function Category({ categories }) {
-    console.log(categories);
     return (
         <Authenticated>
-            <div className="bg-white relative w-full overflow-x-auto shadow rounded px-4 md:px-8 py-3 md:py-4">
+            <div className="bg-white relative w-full overflow-x-auto shadow rounded px-4 md:px-8 py-6 md:py-8">
                 <Table columns={['Id', 'Name', 'Slug', 'Status', 'Action']} >
                     {
                         categories && categories.data.map((data, index) => {

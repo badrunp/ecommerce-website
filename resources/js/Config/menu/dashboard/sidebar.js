@@ -13,7 +13,7 @@ const menuSidebars = [
     },
     {
         id: 2,
-        title: 'Dashboard',
+        title: 'Home',
         link: route('backend.dashboard'),
         icon: AiOutlineDashboard,
         mt: true

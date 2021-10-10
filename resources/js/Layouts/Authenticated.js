@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Head } from '@inertiajs/inertia-react';
+import { Head, usePage } from '@inertiajs/inertia-react';
 import Resize from '@/Hooks/Resize';
 import { motion } from 'framer-motion';
 import Navbar from '@/Components/Dashboard/Navbar/Navbar';
@@ -8,9 +8,10 @@ import { minSidebarHide } from '@/Config/app';
 import Sidebar from '@/Components/Dashboard/Sidebar/Sidebar';
 
 
-export default function Authenticated({ children }) {
+export default function Authenticated({ children, header }) {
     const { width } = Resize();
     const [sidebarOpen, setSidebarOpen] = useState(width > minSidebarHide ? true : false);
+    const { url } = usePage();
 
     return (
         <>
@@ -20,7 +21,7 @@ export default function Authenticated({ children }) {
                 <div className="flex flex-row">
 
                     {/* Sidebar */}
-                    <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> 
+                    <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
                     <motion.div variants={containerVariants} initial={false} animate={sidebarOpen ? 'open' : 'close'} custom={width} className="w-full h-screen bg-gray-100 pl-60">
                         {/* Navbar */}
@@ -29,6 +30,24 @@ export default function Authenticated({ children }) {
                         {/* Main */}
                         <div className="w-full relative h-screen pt-14 md:pt-16 overflow-y-auto">
                             <div className="px-4 md:px-6 py-4">
+                                <div className="mb-5">
+                                    <div className="flex flex-row items-center justify-start space-x-2">
+                                        {
+                                            url.split('/').map((item, index) => {
+                                                if (item != '') {
+                                                    const text = item.charAt(0).toUpperCase() + item.slice(1, item.length);
+                                                    return (
+                                                        <>
+                                                            <h4 key={index} className="text-gray-500 text-base tracking-tighter md:tracking-normal md:text-lg font-semibold">{text}</h4>
+                                                            {index != url.split('/').length -1 ? <h4 key={index} className="text-gray-600 text-xl font-semibold">{`>`}</h4> : null}
+                                                        </>
+                                                    )
+                                                }
+                                            })
+                                        }
+                                    </div>
+                                </div>
+
                                 {children}
                             </div>
                         </div>
