@@ -37,10 +37,10 @@ export default function Authenticated({ children, header }) {
                                                 if (item != '') {
                                                     const text = item.charAt(0).toUpperCase() + item.slice(1, item.length);
                                                     return (
-                                                        <>
-                                                            <h4 key={index} className="text-gray-500 text-base tracking-tighter md:tracking-normal md:text-lg font-semibold">{text}</h4>
-                                                            {index != url.split('/').length -1 ? <h4 key={index} className="text-gray-600 text-sm font-semibold">{`>`}</h4> : null}
-                                                        </>
+                                                        <React.Fragment key={index}>
+                                                            <h4 className="text-gray-600 text-base tracking-tighter md:tracking-normal md:text-lg">{text}</h4>
+                                                            {index != url.split('/').length -1 ? <h4 className="text-gray-600 text-sm font-semibold">{`>`}</h4> : null}
+                                                        </React.Fragment>
                                                     )
                                                 }
                                             })

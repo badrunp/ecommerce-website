@@ -1,25 +1,35 @@
-import ButtonRoundedHover from '@/Components/ButtonRoundedHover'
+import ButtonDropdown from '@/Components/ButtonDropdown'
+import ButtonOutline from '@/Components/ButtonOutline'
+import ContainerComponent from '@/Components/ContainerComponent'
+import LinkOutline from '@/Components/LinkOutline'
 import SeacrhComponent from '@/Components/SearchComponent'
 import Table from '@/Components/Table'
 import Authenticated from '@/Layouts/Authenticated'
 import React from 'react'
+import { IoIosArrowDown } from 'react-icons/io';
+
 
 function Category({ categories }) {
     return (
         <Authenticated>
-            <div className="bg-white relative w-full shadow rounded px-4 md:px-8 py-3 md:py-6 mb-3">
+            <ContainerComponent className="mb-3">
                 <div className="flex flex-row items-center justify-between space-x-5 md:space-x-8">
                     <div className="flex flex-row items-center space-x-3">
                         <div className="relative">
-                            <button type="button" className="px-4 md:px-7 py-2 text-sm md:text-base text-gray-600 rounded md:rounded-md border border-gray-300 focus:outline-none">
-                                Sorting BY
-                            </button>
+                            <ButtonDropdown>
+                                <span className="block">Category Shorting</span>
+                                <IoIosArrowDown />
+                            </ButtonDropdown>
                         </div>
                     </div>
 
                     <SeacrhComponent placeholder="Search for categories..." />
+
+                    <LinkOutline link={route('backend.categories.create')}>
+                        Create Category
+                    </LinkOutline>
                 </div>
-            </div>
+            </ContainerComponent>
             <div className="bg-white relative w-full overflow-x-auto shadow rounded px-4 md:px-8 py-6 md:py-8">
                 <Table columns={['Id', 'Name', 'Slug', 'Status', 'Action']} >
                     {

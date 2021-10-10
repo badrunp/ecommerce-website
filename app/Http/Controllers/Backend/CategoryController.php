@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Backend/Category/Create');
     }
 
     /**
@@ -39,7 +39,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = $request->validate([
+            'name' => 'required',
+            'slug' => 'required'
+        ]);
+
+        Category::create($category);
+
+        return redirect()->route('backend.categories.index');
     }
 
     /**
