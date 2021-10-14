@@ -28,7 +28,7 @@ const userNotifVariants = {
     }
 }
 
-function NavbarRight() {
+function NavbarRight(props) {
     const [userDropdownOpen, setUserDropdownOpen] = useState(false);
     const [userNotifOpen, setNotifDropdownOpen] = useState(false);
     const refUserDropdown = useRef(null);
@@ -109,14 +109,14 @@ function NavbarRight() {
                                             <div className="w-16 mb-2" style={{ height: 66 }}>
                                                 <img src={image} alt="image profil" className="object-cover bg-center rounded-full w-full h-full" />
                                             </div>
-                                            <h3 className="block text-base truncate font-bold text-gray-800 tracking-tight">Muhammad Badrun</h3>
+                                            <h3 className="block text-base truncate font-bold text-gray-600 tracking-tight">{user.name}</h3>
                                             <h5 className="block text-blue-500 text-sm font-bold">(Admin)</h5>
                                         </div>
                                     </div>
                                     <div className="relative w-full h-auto py-4 flex flex-col space-y-1">
                                         {
                                             menuUserNavbarDropdown.map((item) => (
-                                                <Link key={item.id} href={item.link} as={item.method != 'GET' ? 'button' : 'a'} onClick={(e) => handleLogout(e, item.method)} className="text-gray-700 font-semibold py-2 w-full px-2 flex items-center space-x-3 rounded hover:bg-gray-100">
+                                                <Link key={item.id} href={item.link} as={item.method != 'GET' ? 'button' : 'a'} onClick={(e) => handleLogout(e, item.method)} className="text-gray-500 font-semibold py-2 w-full px-2 flex items-center space-x-3 rounded hover:bg-gray-100">
                                                     <item.icon className="text-gray-600 w-5 h-5" />
                                                     <span className="block">{item.title}</span>
                                                 </Link>

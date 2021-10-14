@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -23,12 +24,16 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $category = $request->validate([
+        $request->validate([
             'name' => 'required',
-            'slug' => 'required'
         ]);
 
-        Category::create($category);
+        $slug = Str::slug($request->name);
+
+        Category::create([
+            'name' => $request->name,
+            'slug' => $slug
+        ]);
 
         return redirect()->route('backend.categories.index');
     }
@@ -38,14 +43,26 @@ class CategoryController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return Inertia::render('Backend/Category/Edit', [
+            'category' => $category
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $slug = Str::slug($request->name);
+        $category->update([
+            'name' => $request->name,
+            'slug' => $slug
+        ]);
+
+        return redirect()->route('backend.categories.index');
     }
 
     public function destroy(Category $category)

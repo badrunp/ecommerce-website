@@ -1,17 +1,17 @@
 import ButtonDropdown from '@/Components/ButtonDropdown'
-import ButtonOutline from '@/Components/ButtonOutline'
 import ContainerComponent from '@/Components/ContainerComponent'
 import LinkOutline from '@/Components/LinkOutline'
 import SeacrhComponent from '@/Components/SearchComponent'
 import Table from '@/Components/Table'
 import Authenticated from '@/Layouts/Authenticated'
+import { Link } from '@inertiajs/inertia-react'
 import React from 'react'
 import { IoIosArrowDown } from 'react-icons/io';
 
 
-function Category({ categories }) {
+function Category({ categories, ...props }) {
     return (
-        <Authenticated>
+        <Authenticated headers={['Dashboard', 'Category']}>
             <ContainerComponent className="mb-3">
                 <div className="flex flex-row items-center justify-between space-x-5 md:space-x-8">
                     <div className="flex flex-row items-center space-x-3">
@@ -41,7 +41,7 @@ function Category({ categories }) {
                                     <Table.Td>{data.name}</Table.Td>
                                     <Table.Td>{data.slug}</Table.Td>
                                     <Table.Td>{data.status}</Table.Td>
-                                    <Table.Td>{'Action'}</Table.Td>
+                                    <Table.Td><Link href={route('backend.categories.edit', data)}>Edit</Link></Table.Td>
                                 </Table.Tr>
                             )
                         })

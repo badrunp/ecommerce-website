@@ -34,7 +34,9 @@ Route::prefix('dashboard')->middleware(['auth'])->name('backend.')->group(functi
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::resource('categories', CategoryController::class);
+    Route::resource('categories', CategoryController::class)->scoped([
+        'category' => 'slug'
+    ]);
 });
 
 require __DIR__.'/auth.php';

@@ -8,7 +8,7 @@ import { minSidebarHide } from '@/Config/app';
 import Sidebar from '@/Components/Dashboard/Sidebar/Sidebar';
 
 
-export default function Authenticated({ children, header }) {
+export default function Authenticated({ children, headers }) {
     const { width } = Resize();
     const [sidebarOpen, setSidebarOpen] = useState(width > minSidebarHide ? true : false);
     const { url } = usePage();
@@ -29,24 +29,25 @@ export default function Authenticated({ children, header }) {
 
                         {/* Main */}
                         <div className="w-full relative h-screen pt-14 md:pt-16 overflow-y-auto">
-                            <div className="px-4 md:px-6 py-4">
-                                <div className="mb-6 mt-2">
-                                    <div className="flex flex-row items-center justify-start space-x-2">
-                                        {
-                                            url.split('/').map((item, index) => {
-                                                if (item != '') {
-                                                    const text = item.charAt(0).toUpperCase() + item.slice(1, item.length);
-                                                    return (
-                                                        <React.Fragment key={index}>
-                                                            <h4 className="text-gray-600 text-base tracking-tighter md:tracking-normal md:text-lg">{text}</h4>
-                                                            {index != url.split('/').length -1 ? <h4 className="text-gray-600 text-sm font-semibold">{`>`}</h4> : null}
-                                                        </React.Fragment>
-                                                    )
+                            <div className="px-4 md:px-6 py-4 md:py-5">
+                                {
+                                    headers && (
+                                        <div className="mb-6 mt-2">
+                                            <div className="flex flex-row items-center justify-start space-x-2">
+                                                {
+                                                    headers.map((item, index) => {
+                                                        return (
+                                                            <React.Fragment key={index}>
+                                                                <h4 className="text-gray-600 text-sm tracking-tighter md:tracking-wide md:text-lg">{item}</h4>
+                                                                {index != headers.length - 1 ? <h4 className="text-gray-600 text-sm font-semibold">{`>`}</h4> : null}
+                                                            </React.Fragment>
+                                                        )
+                                                    })
                                                 }
-                                            })
-                                        }
-                                    </div>
-                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                }
 
                                 {children}
                             </div>

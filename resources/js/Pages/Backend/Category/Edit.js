@@ -7,27 +7,26 @@ import Authenticated from '@/Layouts/Authenticated'
 import { useForm } from '@inertiajs/inertia-react'
 import React from 'react'
 
-function Create() {
-
-    const { data, setData, post, errors } = useForm({
-        name: '',
+function Edit({category}) {
+    const { data, setData, put, errors } = useForm({
+        name: category.name,
         image: ''
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('backend.categories.store'));
+        put(route('backend.categories.update', category));
     }
 
     return (
-        <Authenticated headers={['Dashboard', 'Category', 'Create']}>
+        <Authenticated headers={['Dashboard', 'Category', 'Edit']}>
             <ContainerComponent className="w-full md:max-w-xl">
                 <div className="py-4">
                     <form onSubmit={handleSubmit}>
                         <div>
                             <Label forInput="name" value="Name" />
 
-                            <Input type="text" value={data.name} className="mt-2 block w-full" handleChange={(e) => setData('name', e.target.value)} />
+                            <Input type="text" name="name" value={data.name} className="mt-2 block w-full" handleChange={(e) => setData('name', e.target.value)} />
 
                             {errors.name && (
                                 <ErrorMessage error={errors.name} />
@@ -37,7 +36,7 @@ function Create() {
                         <div className="mt-6">
                             <Label forInput="slug" value="Slug" />
 
-                            <Input type="text" value={data.name} className="mt-2 block w-full" readOnly disabled />
+                            <Input type="text" name="slug" value={data.name} className="mt-2 block w-full" readOnly disabled />
 
                             {errors.slug && (
                                 <ErrorMessage error={errors.slug} /> 
@@ -55,7 +54,7 @@ function Create() {
                         </div>
 
                         <div className="mt-6">
-                            <Button className="bg-gradient-to-br from-blue-500 to-blue-600 focus:ring-2 focus:ring-blue-300">Create</Button>
+                            <Button className="bg-gradient-to-br from-blue-500 to-blue-600 focus:ring-2 focus:ring-blue-300">Edit</Button>
                         </div>
                     </form>
                 </div>
@@ -64,4 +63,4 @@ function Create() {
     )
 }
 
-export default Create
+export default Edit
