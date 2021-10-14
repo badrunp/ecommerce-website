@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Head, usePage } from '@inertiajs/inertia-react';
+import { Head, Link, usePage } from '@inertiajs/inertia-react';
 import Resize from '@/Hooks/Resize';
 import { motion } from 'framer-motion';
 import Navbar from '@/Components/Dashboard/Navbar/Navbar';
@@ -29,16 +29,26 @@ export default function Authenticated({ children, headers }) {
 
                         {/* Main */}
                         <div className="w-full relative h-screen pt-14 md:pt-16 overflow-y-auto">
-                            <div className="px-4 md:px-6 py-4 md:py-5">
+                            <div className={`px-4 md:px-6 py-4 ${headers && headers.length > 0 ? 'md:py-4' : 'md:py-5'}`}>
                                 {
                                     headers && (
                                         <div className="mb-6 mt-2">
                                             <div className="flex flex-row items-center justify-start space-x-2">
                                                 {
                                                     headers.map((item, index) => {
+                                                        let routeUrl;
+                                                        if(index === 0){
+                                                            routeUrl = route('backend.dashboard')
+                                                        }else if(index === 1){
+                                                            routeUrl = route(`backend.${item.toLowerCase()}.index`)
+                                                        }else if(index === 2) {
+                                                            routeUrl = url;
+                                                        }else{
+                                                            routeUrl = route('backend.dashboard')
+                                                        }
                                                         return (
                                                             <React.Fragment key={index}>
-                                                                <h4 className="text-gray-600 text-sm tracking-tighter md:tracking-wide md:text-lg">{item}</h4>
+                                                                <Link href={routeUrl} className="text-gray-600 text-sm tracking-tighter md:tracking-wide md:text-base">{item}</Link>
                                                                 {index != headers.length - 1 ? <h4 className="text-gray-600 text-sm font-semibold">{`>`}</h4> : null}
                                                             </React.Fragment>
                                                         )

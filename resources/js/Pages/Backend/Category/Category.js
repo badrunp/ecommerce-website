@@ -11,23 +11,23 @@ import { IoIosArrowDown } from 'react-icons/io';
 
 function Category({ categories, ...props }) {
     return (
-        <Authenticated headers={['Dashboard', 'Category']}>
+        <Authenticated headers={['Dashboard', 'Categories']}>
             <ContainerComponent className="mb-3">
                 <div className="flex flex-row items-center justify-between space-x-5 md:space-x-8">
-                    <div className="flex flex-row items-center space-x-3">
+                    <div className="flex flex-row items-center space-x-4">
                         <div className="relative">
                             <ButtonDropdown>
-                                <span className="block">Category Shorting</span>
+                                <span className="block">Shorting</span>
                                 <IoIosArrowDown />
                             </ButtonDropdown>
                         </div>
+                        <LinkOutline link={route('backend.categories.create')}>
+                            Create
+                        </LinkOutline>
                     </div>
 
                     <SeacrhComponent placeholder="Search for categories..." />
 
-                    <LinkOutline link={route('backend.categories.create')}>
-                        Create Category
-                    </LinkOutline>
                 </div>
             </ContainerComponent>
             <div className="bg-white relative w-full overflow-x-auto shadow rounded px-4 md:px-8 py-6 md:py-8">

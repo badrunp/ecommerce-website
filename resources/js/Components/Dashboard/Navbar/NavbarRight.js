@@ -109,7 +109,7 @@ function NavbarRight(props) {
                                             <div className="w-16 mb-2" style={{ height: 66 }}>
                                                 <img src={image} alt="image profil" className="object-cover bg-center rounded-full w-full h-full" />
                                             </div>
-                                            <h3 className="block text-base truncate font-bold text-gray-600 tracking-tight">{user.name}</h3>
+                                            <h3 className="block text-base truncate font-bold text-gray-600 tracking-tight">Muhammad Badrun</h3>
                                             <h5 className="block text-blue-500 text-sm font-bold">(Admin)</h5>
                                         </div>
                                     </div>
