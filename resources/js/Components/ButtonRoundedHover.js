@@ -1,8 +1,8 @@
 import React from 'react'
 
-function ButtonRoundedHover({ children, onClick }) {
+function ButtonRoundedHover({ children, handleClick, className, bgColor = 'bg-gray-50 hover:bg-gray-100' }) {
     return (
-        <button onClick={onClick} className="block relative rounded-full bg-gray-50 hover:bg-gray-100 p-2 transition ease-in-out duration-150">
+        <button onClick={handleClick && handleClick} className={`block relative rounded-full p-2 transition ease-in-out duration-150 ${bgColor} ${className}`}>
             {children}
         </button>
     )

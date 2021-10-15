@@ -6,6 +6,7 @@ import Label from '@/Components/Label'
 import Authenticated from '@/Layouts/Authenticated'
 import { useForm } from '@inertiajs/inertia-react'
 import React from 'react'
+import { IoCreateOutline } from 'react-icons/io5'
 
 function Create() {
 
@@ -19,8 +20,14 @@ function Create() {
         post(route('backend.categories.store'));
     }
 
+    const headers = [
+        'Dasboard',
+        'Categories',
+        <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />
+    ]
+
     return (
-        <Authenticated headers={['Dashboard', 'Categories', 'Create']}>
+        <Authenticated headers={headers}>
             <ContainerComponent className="w-full md:max-w-xl">
                 <div className="py-4">
                     <form onSubmit={handleSubmit}>
