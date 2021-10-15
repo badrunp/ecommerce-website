@@ -5,13 +5,15 @@ import SeacrhComponent from '@/Components/SearchComponent'
 import Table from '@/Components/Table'
 import Authenticated from '@/Layouts/Authenticated'
 import { Link } from '@inertiajs/inertia-react'
-import React, {useState } from 'react'
+import React, { useState } from 'react'
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoCreateOutline } from 'react-icons/io5';
 import { BiSearch } from 'react-icons/bi'
 import ButtonRoundedHover from '@/Components/ButtonRoundedHover'
 import NormalDropdown from '@/Components/Dropdown/NormalDropdown'
 import { AnimatePresence, motion } from 'framer-motion'
+import { HiDotsHorizontal } from 'react-icons/hi'
+import TableAction from '@/Components/TableAction'
 
 const listDropdownSorting = [
     {
@@ -99,7 +101,10 @@ function Category({ categories, ...props }) {
                                     <Table.Td>{data.name}</Table.Td>
                                     <Table.Td>{data.slug}</Table.Td>
                                     <Table.Td>{data.status}</Table.Td>
-                                    <Table.Td><Link href={route('backend.categories.edit', data)}>Edit</Link></Table.Td>
+                                    <Table.Td>
+                                        <TableAction data={data}/>
+                                        
+                                    </Table.Td>
                                 </Table.Tr>
                             )
                         })
