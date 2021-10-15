@@ -67,13 +67,13 @@ function NavbarRight(props) {
                 <IoSettingsOutline className="w-5 h-5 text-gray-600" />
             </ButtonRoundedHover>
             <div className="relative">
-                <ButtonRoundedHover onClick={() => setNotifDropdownOpen(!userNotifOpen)}>
+                <ButtonRoundedHover handleClick={() => setNotifDropdownOpen(!userNotifOpen)}>
                     <IoMdNotificationsOutline className="w-5 h-5 text-gray-600" />
                     <div className="absolute right-0 bottom-0 bg-red-500 rounded-full overflow-hidden h-4 w-4">
                         <span className="block text-xs text-white">1</span>
                     </div>
                 </ButtonRoundedHover>
-                <AnimatePresence exitBeforeEnter>
+                <AnimatePresence>
                     {
                         userNotifOpen && (
                             <motion.div variants={userNotifVariants} initial="hidden" animate="visible" exit="hidden" className="absolute top-0 right-0 mt-14" ref={refNotifDropdown}>
