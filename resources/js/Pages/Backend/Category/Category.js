@@ -14,6 +14,8 @@ import NormalDropdown from '@/Components/Dropdown/NormalDropdown'
 import { AnimatePresence, motion } from 'framer-motion'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import TableAction from '@/Components/TableAction'
+import Pagination from '@/Components/Pagination'
+import ButtonOutline from '@/Components/ButtonOutline'
 
 const listDropdownSorting = [
     {
@@ -34,6 +36,17 @@ const listDropdownSorting = [
     },
 ]
 
+const perPage = [
+    {
+        title: 1,
+        sort: 1,
+    },
+    {
+        title: 2,
+        sort: 1,
+    }
+]
+
 const searchVariants = {
     hidden: {
         opacity: 0,
@@ -51,10 +64,11 @@ const searchVariants = {
     }
 }
 
-function Category({ categories, ...props }) {
+function Category({ categories }) {
 
     const [isDropdownSorting, setIsDropdownSorting] = useState(false);
     const [isOpenSearch, setIsOpenSearch] = useState(false);
+    const [isPerPage, setIsPerPage] = useState(false);
     return (
         <Authenticated headers={['Dashboard', 'Categories']}>
             <ContainerComponent className="mb-3">
@@ -66,6 +80,13 @@ function Category({ categories, ...props }) {
                                 <IoIosArrowDown />
                             </ButtonDropdown>
                             <NormalDropdown listItem={listDropdownSorting} isOpen={isDropdownSorting} handleClose={() => setIsDropdownSorting(false)} />
+                        </div>
+                        <div className="relative">
+                            <ButtonDropdown handleClick={() => setIsPerPage(!isPerPage)}>
+                                <span className="block text-xs md:text-base">1</span>
+                                <IoIosArrowDown />
+                            </ButtonDropdown>
+                            <NormalDropdown className="px-8" listItem={perPage} isOpen={isPerPage} handleClose={() => setIsPerPage(false)} />
                         </div>
                         <LinkOutline link={route('backend.categories.create')}>
                             <IoCreateOutline className="h-4 w-4 md:w-6 md:h-6" />
@@ -102,14 +123,16 @@ function Category({ categories, ...props }) {
                                     <Table.Td>{data.slug}</Table.Td>
                                     <Table.Td>{data.status}</Table.Td>
                                     <Table.Td>
-                                        <TableAction data={data}/>
-                                        
+                                        <TableAction data={data} />
+
                                     </Table.Td>
                                 </Table.Tr>
                             )
                         })
                     }
                 </Table>
+
+                <Pagination items={categories} />
             </div>
         </Authenticated>
     )
