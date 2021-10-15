@@ -10,10 +10,22 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('sorting')) {
+            switch ($request->query('sorting')) {
+                case 'oldlatest':
+                    $category = Category::orderBy('created_at', 'ASC');
+                    break;
+                default:
+                    $category = Category::orderBy('created_at', 'DESC');
+            }
+        }
+        $category = $category->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Category/Category', [
-            'categories' => Category::latest()->paginate(10)
+            'categories' => $category,
+            'limit' => $request->query('limit', 5),
+            'sorting' => $request->query('sorting', 'latest'),
         ]);
     }
 

@@ -20,30 +20,22 @@ import ButtonOutline from '@/Components/ButtonOutline'
 const listDropdownSorting = [
     {
         title: 'Sorting by latest',
-        sort: 'byid'
+        sort: 'latest'
     },
     {
         title: 'Sorting by old latest',
-        sort: 'byid'
-    },
-    {
-        title: 'Sorting by ',
-        sort: 'byid'
-    },
-    {
-        title: 'Sorting 1',
-        sort: 'byid'
-    },
+        sort: 'oldlatest'
+    }
 ]
 
 const perPage = [
     {
-        title: 1,
-        sort: 1,
+        title: 5,
+        sort: 5,
     },
     {
-        title: 2,
-        sort: 1,
+        title: 10,
+        sort: 10,
     }
 ]
 
@@ -64,7 +56,7 @@ const searchVariants = {
     }
 }
 
-function Category({ categories }) {
+function Category({ categories, limit, sorting }) {
 
     const [isDropdownSorting, setIsDropdownSorting] = useState(false);
     const [isOpenSearch, setIsOpenSearch] = useState(false);
@@ -79,32 +71,32 @@ function Category({ categories }) {
                                 <span className="block text-xs md:text-base">Sorting</span>
                                 <IoIosArrowDown />
                             </ButtonDropdown>
-                            <NormalDropdown listItem={listDropdownSorting} isOpen={isDropdownSorting} handleClose={() => setIsDropdownSorting(false)} />
+                            <NormalDropdown type="link" query="sorting" value={sorting} listItem={listDropdownSorting} isOpen={isDropdownSorting} handleClose={() => setIsDropdownSorting(false)} />
                         </div>
                         <div className="relative">
                             <ButtonDropdown handleClick={() => setIsPerPage(!isPerPage)}>
-                                <span className="block text-xs md:text-base">1</span>
+                                <span className="block text-xs md:text-base">{limit}</span>
                                 <IoIosArrowDown />
                             </ButtonDropdown>
-                            <NormalDropdown className="px-8" listItem={perPage} isOpen={isPerPage} handleClose={() => setIsPerPage(false)} />
+                            <NormalDropdown type="link" query="limit" value={limit} className="px-8" listItem={perPage} isOpen={isPerPage} handleClose={() => setIsPerPage(false)} />
                         </div>
                         <LinkOutline link={route('backend.categories.create')}>
                             <IoCreateOutline className="h-4 w-4 md:w-6 md:h-6" />
                         </LinkOutline>
                     </div>
 
-                    <ButtonRoundedHover handleClick={() => setIsOpenSearch(!isOpenSearch)} className="block md:hidden border border-gray-200" bgColor="bg-white hover:bg-gray-100">
+                    <ButtonRoundedHover handleClick={() => setIsOpenSearch(!isOpenSearch)} className="block lg:hidden border border-gray-200" bgColor="bg-white hover:bg-gray-100">
                         <BiSearch className="h-4 w-4 md:w-6 md:h-6 text-gray-600" />
                     </ButtonRoundedHover>
 
-                    <SeacrhComponent placeholder="Search..." className="hidden md:flex md:justify-end md:items-center" width="auto" />
+                    <SeacrhComponent placeholder="Search..." className="hidden lg:flex lg:justify-end lg:items-center" width="auto" />
                 </div>
             </ContainerComponent>
             <AnimatePresence>
                 {
                     isOpenSearch && (
                         <motion.div variants={searchVariants} initial="hidden" animate="visible" exit="hidden">
-                            <ContainerComponent className="block md:hidden" rounded="rounded">
+                            <ContainerComponent className="block lg:hidden" rounded="rounded">
                                 <SeacrhComponent placeholder="Search for categories..." />
                             </ContainerComponent>
                         </motion.div>
