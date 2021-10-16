@@ -21,7 +21,7 @@ const variants = {
     }
 }
 
-function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', width = "max-content", className = '', type = 'button', value = 5, query }) {
+function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', width = "max-content", className = '', type = {name: 'button', is: 'button'}, value = 5, query = '' }) {
     const ref = useRef();
     const {url} = usePage()
     const urlLimit = url.indexOf(`?${query}=${value}`) != -1 ? url.replace(`?${query}=${value}`, '?') : url.indexOf(`&${query}=${value}`) !== -1 ? url.replace(`&${query}=${value}`, '') : url
@@ -48,11 +48,19 @@ function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', w
                         <div className={`bg-white shadow rounded py-1 overflow-hidden border border-gray-200 border-opacity-50 divide-y-2 divide-opacity-40 divide-gray-200 ${width}`}>
                             {
                                 listItem.map((item, index) => {
+                                    let href;
+                                    if(type.name === 'link'){
+                                        if(type.is === 'sort'){
+                                            href = urlLimit.indexOf('?') !== -1 ? `${urlLimit}&${query}=${item.sort}` : `${urlLimit}?${query}=${item.sort}`
+                                        }else if(type.is === 'url'){
+                                            href = '/';
+                                        }
+                                    }
                                     return (
-                                        type === 'button' ? (
-                                            <div key={index} className={`py-2 px-5 truncate text-gray-600 text-sm md:text-base hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out ${className}`}>{item.title}</div>
+                                        type.name === 'button' ? (
+                                            <button key={index} className={`block py-2 px-5 truncate text-gray-600 text-sm md:text-base hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out ${className}`}>{item.title}</button>
                                         ) : (
-                                            <Link key={index} href={urlLimit.indexOf('?') !== -1 ? `${urlLimit}&${query}=${item.sort}` : `${urlLimit}?${query}=${item.sort}`} className={`block py-2 px-5 truncate text-gray-600 text-sm md:text-base hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out ${value == item.sort && 'bg-gray-100'} ${className}`}>{item.title}</Link>
+                                            <Link key={index} href={href} className={`block py-2 px-5 truncate text-sm md:text-base cursor-pointer transition duration-150 ease-in-out ${type.is === 'sort' ? value == item.sort ? 'bg-blue-500 text-white hover:bg-blue-600' : 'hover:bg-gray-100 text-gray-600' : 'hover:bg-gray-100 text-gray-600'} ${className}`}>{item.title}</Link>
                                         )
                                     )
                                 })

@@ -4,7 +4,6 @@ import LinkOutline from '@/Components/LinkOutline'
 import SeacrhComponent from '@/Components/SearchComponent'
 import Table from '@/Components/Table'
 import Authenticated from '@/Layouts/Authenticated'
-import { Link } from '@inertiajs/inertia-react'
 import React, { useState } from 'react'
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoCreateOutline } from 'react-icons/io5';
@@ -12,32 +11,9 @@ import { BiSearch } from 'react-icons/bi'
 import ButtonRoundedHover from '@/Components/ButtonRoundedHover'
 import NormalDropdown from '@/Components/Dropdown/NormalDropdown'
 import { AnimatePresence, motion } from 'framer-motion'
-import { HiDotsHorizontal } from 'react-icons/hi'
 import TableAction from '@/Components/TableAction'
 import Pagination from '@/Components/Pagination'
-import ButtonOutline from '@/Components/ButtonOutline'
-
-const listDropdownSorting = [
-    {
-        title: 'Sorting by latest',
-        sort: 'latest'
-    },
-    {
-        title: 'Sorting by old latest',
-        sort: 'oldlatest'
-    }
-]
-
-const perPage = [
-    {
-        title: 5,
-        sort: 5,
-    },
-    {
-        title: 10,
-        sort: 10,
-    }
-]
+import { listDropdownSorting, perPage } from '@/Config/menu/dashboard/category'
 
 const searchVariants = {
     hidden: {
@@ -71,14 +47,14 @@ function Category({ categories, limit, sorting }) {
                                 <span className="block text-xs md:text-base">Sorting</span>
                                 <IoIosArrowDown />
                             </ButtonDropdown>
-                            <NormalDropdown type="link" query="sorting" value={sorting} listItem={listDropdownSorting} isOpen={isDropdownSorting} handleClose={() => setIsDropdownSorting(false)} />
+                            <NormalDropdown type={{name: 'link', is: 'sort'}} query="sorting" value={sorting} listItem={listDropdownSorting} isOpen={isDropdownSorting} handleClose={() => setIsDropdownSorting(false)} />
                         </div>
                         <div className="relative">
                             <ButtonDropdown handleClick={() => setIsPerPage(!isPerPage)}>
                                 <span className="block text-xs md:text-base">{limit}</span>
                                 <IoIosArrowDown />
                             </ButtonDropdown>
-                            <NormalDropdown type="link" query="limit" value={limit} className="px-8" listItem={perPage} isOpen={isPerPage} handleClose={() => setIsPerPage(false)} />
+                            <NormalDropdown type={{name: 'link', is: 'sort'}} query="limit" value={limit} className="px-8" listItem={perPage} isOpen={isPerPage} handleClose={() => setIsPerPage(false)} />
                         </div>
                         <LinkOutline link={route('backend.categories.create')}>
                             <IoCreateOutline className="h-4 w-4 md:w-6 md:h-6" />
