@@ -15,8 +15,8 @@ class CategoryController extends Controller
         $category = Category::sorting($request->query('sorting'))->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Category/Category', [
             'categories' => $category,
-            'limit' => $request->query('limit', 5),
-            'sorting' => $request->query('sorting', 'latest'),
+            'limit' => $request->query('limit', null),
+            'sorting' => $request->query('sorting', null),
         ]);
     }
     public function create()
@@ -72,5 +72,11 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('backend.categories.index');
+    }
+
+    public function search(Request $request){
+        return response()->json([
+            'data' => Category::sorting($request->query('sorting'))->search($request->query('search'))->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString()
+        ]);
     }
 }

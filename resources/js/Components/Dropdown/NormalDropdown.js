@@ -1,25 +1,7 @@
+import { dropdownVariants } from '@/Config/variants/dropdown';
 import { Link, usePage } from '@inertiajs/inertia-react';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react'
-
-const variants = {
-    hidden: {
-        opacity: 0,
-        y: 100,
-        transition: {
-            duration: .2
-        }
-    },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            type: 'spring',
-            damping: 30,
-            stiffness: 300
-        }
-    }
-}
+import React, { useEffect, useRef } from 'react'
 
 function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', width = "max-content", className = '', type = {name: 'button', is: 'button'}, value = 5, query = '' }) {
     const ref = useRef();
@@ -44,7 +26,7 @@ function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', w
         <React.Fragment>
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div variants={variants} initial="hidden" animate="visible" exit="hidden" className={`absolute top-0 mt-14 z-10 ${to}`} ref={ref}>
+                    <motion.div variants={dropdownVariants} initial="hidden" animate="visible" exit="hidden" className={`absolute top-0 mt-11 md:mt-14 z-10 ${to}`} ref={ref}>
                         <div className={`bg-white shadow rounded py-1 overflow-hidden border border-gray-200 border-opacity-50 divide-y-2 divide-opacity-40 divide-gray-200 ${width}`}>
                             {
                                 listItem.map((item, index) => {
@@ -58,7 +40,7 @@ function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', w
                                     }
                                     return (
                                         type.name === 'button' ? (
-                                            <button key={index} className={`block py-2 px-5 truncate text-gray-600 text-sm md:text-base hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out ${className}`}>{item.title}</button>
+                                            <button key={index} className={`block py-2 w-full px-5 truncate text-gray-600 text-sm md:text-base hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out ${className}`}>{item.title}</button>
                                         ) : (
                                             <Link key={index} href={href} className={`block py-2 px-5 truncate text-sm md:text-base cursor-pointer transition duration-150 ease-in-out ${type.is === 'sort' ? value == item.sort ? 'bg-blue-500 text-white hover:bg-blue-600' : 'hover:bg-gray-100 text-gray-600' : 'hover:bg-gray-100 text-gray-600'} ${className}`}>{item.title}</Link>
                                         )

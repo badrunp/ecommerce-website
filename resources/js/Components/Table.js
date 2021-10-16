@@ -9,7 +9,7 @@ function Table({ columns, children }) {
                         columns && columns.map((column, index) => {
                             const wColumnId = column === 'No' || column === 'Id' || column == 'Action' ? 'w-24' : ''
                             return (
-                                <th key={index} className={`relative py-2 md:py-3 px-6 text-gray-600 text-base ${wColumnId}`}>{column}</th>
+                                <th key={index} className={`relative py-2 md:py-3 px-6 text-gray-600 text-sm md:text-base ${wColumnId}`}>{column}</th>
                             )
                         })
                     }
@@ -23,7 +23,7 @@ function Table({ columns, children }) {
 }
 
 Table.Td = ({children}) => {
-    return <td className="relative py-2 md:py-3 px-6 text-gray-600 text-base">{children}</td>
+    return <td className="relative py-2 md:py-3 px-6 text-gray-600 text-sm md:text-base">{children}</td>
 }
 
 Table.Tr = ({children, evenHoverClass = ''}) => {

@@ -34,6 +34,7 @@ Route::prefix('dashboard')->middleware(['auth'])->name('backend.')->group(functi
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    Route::get('/dashboard/categories/search', [CategoryController::class, 'search'])->name('categories.search');
     Route::resource('categories', CategoryController::class)->scoped([
         'category' => 'slug'
     ]);

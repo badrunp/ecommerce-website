@@ -18,7 +18,7 @@ function Pagination({ items }) {
                     }
 
                     return (
-                        <Link key={index} as={link.url === null ? 'button' : 'a'} disabled={link.url === null ? true : false} href={link.url !== null && link.url} className={`w-max py-2 px-4 ${link.active && 'bg-blue-500 text-white'} ${index !== items.links.length - 1 && 'border-r'} border-gray-200 ${link.url === null ? 'bg-gray-100 cursor-text' : ''}`}>{label}</Link>
+                        <Link key={index} as={link.url === null ? 'button' : 'a'} disabled={link.url === null ? true : false} href={link.url !== null && link.url} className={`w-max text-sm md:text-base py-2 px-4 ${link.active && 'bg-blue-500 text-white'} ${index !== items.links.length - 1 && 'border-r'} border-gray-200 ${link.url === null ? 'bg-gray-100 cursor-text' : ''}`}>{label}</Link>
                     )
                 })
             }

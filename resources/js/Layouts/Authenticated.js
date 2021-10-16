@@ -32,7 +32,7 @@ export default function Authenticated({ children, headers }) {
                             <div className={`px-4 md:px-6 py-4 ${headers && headers.length > 0 ? 'md:py-4' : 'md:py-5'}`}>
                                 {
                                     headers && (
-                                        <div className="mb-6 mt-2">
+                                        <div className="mb-3 md:mb-6 md:mt-2">
                                             <div className="flex flex-row items-center justify-start space-x-2">
                                                 {
                                                     headers.map((item, index) => {
@@ -48,7 +48,7 @@ export default function Authenticated({ children, headers }) {
                                                         }
                                                         return (
                                                             <React.Fragment key={index}>
-                                                                <Link href={routeUrl} className="text-gray-600 text-sm tracking-tighter md:tracking-wide md:text-base">{item}</Link>
+                                                                <Link href={routeUrl} className="text-gray-600 text-sm md:tracking-wide md:text-base">{item}</Link>
                                                                 {index != headers.length - 1 ? <h4 className="text-gray-600 text-sm font-semibold">{`>`}</h4> : null}
                                                             </React.Fragment>
                                                         )
