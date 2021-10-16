@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from 'react'
 function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', width = "max-content", className = '', type = {name: 'button', is: 'button'}, value = 5, query = '' }) {
     const ref = useRef();
     const {url} = usePage()
-    const urlLimit = url.indexOf(`?${query}=${value}`) != -1 ? url.replace(`?${query}=${value}`, '?') : url.indexOf(`&${query}=${value}`) !== -1 ? url.replace(`&${query}=${value}`, '') : url
+    const path = url.indexOf(`?${query}=${value}`) != -1 ? url.replace(`?${query}=${value}`, '?') : url.indexOf(`&${query}=${value}`) !== -1 ? url.replace(`&${query}=${value}`, '') : url
 
     useEffect(() => {
         window.addEventListener('click', handleClick)
@@ -33,7 +33,7 @@ function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', w
                                     let href;
                                     if(type.name === 'link'){
                                         if(type.is === 'sort'){
-                                            href = urlLimit.indexOf('?') !== -1 ? `${urlLimit}&${query}=${item.sort}` : `${urlLimit}?${query}=${item.sort}`
+                                            href = path.indexOf('?') !== -1 ? `${path}&${query}=${item.sort}` : `${path}?${query}=${item.sort}`
                                         }else if(type.is === 'url'){
                                             href = '/';
                                         }
