@@ -24,7 +24,9 @@ function SeacrhComponent({ width = 'w-full', value = '', placeholder = 'Search..
                         <BiSearch className="text-gray-600 w-5 h-5 md:w-6 md:h-6" />
                         <input type="text" value={value} placeholder={placeholder} onChange={(e) => handleChange && handleChange(e)} className="border-none focus:outline-none text-sm md:text-base focus:border-none ring-0 focus:ring-0 w-full" />
                     </div>
-                    <button type="submit" className="inline-block text-sm md:text-base rounded px-4 py-2 border border-gray-200 bg-blue-500 text-white">Search</button>
+                    <button type="submit" className="inline-block text-sm md:text-base rounded-md px-4 py-2 focus:ring-2 ring-blue-300 focus:ring-offset-1 font-semibold bg-blue-500 text-white">
+                        <BiSearch className="text-white w-5 h-5 md:w-6 md:h-6" />
+                    </button>
                 </div>
             </form>
         </div>

@@ -48,7 +48,7 @@ export default function Authenticated({ children, headers }) {
                                                         }
                                                         return (
                                                             <React.Fragment key={index}>
-                                                                <Link href={routeUrl} className="text-gray-600 text-sm md:tracking-wide md:text-base">{item}</Link>
+                                                                <Link href={routeUrl} className="text-gray-600 text-sm md:tracking-wide font-semibold md:text-base">{item}</Link>
                                                                 {index != headers.length - 1 ? <h4 className="text-gray-600 text-sm font-semibold">{`>`}</h4> : null}
                                                             </React.Fragment>
                                                         )
