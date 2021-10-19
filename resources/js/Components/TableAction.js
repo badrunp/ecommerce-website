@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from '@inertiajs/inertia-react';
+import React, { useEffect, useState } from 'react'
+import { Link, useForm } from '@inertiajs/inertia-react';
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { IoCreateOutline } from 'react-icons/io5';
 import ButtonRoundedHover from './ButtonRoundedHover'
@@ -8,31 +8,46 @@ import NormalDropdown from './Dropdown/NormalDropdown';
 import Overlay from './Overlay';
 import Button from './Button';
 import ModalComponent from './Modal';
-import { Inertia } from '@inertiajs/inertia';
 
 
-function TableAction({ data }) {
+function TableAction({ data, model = '' }) {
     const [isOpen, setIsOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+    const {post, delete: del} = useForm();
 
-    const handleOpenModal = (e) => {
-        e.preventDefault();
-        setOpenModal(true)
+    const handleClick = (e, type) => {
+        if (type === 'delete') {
+            e.preventDefault();
+            setOpenModal(true)
+        }else if(type === 'editStatus'){
+            post(route(`backend.${model}.updateStatus`, data), {
+                onSuccess: function(){
+                    setIsOpen(false);
+                }
+            });
+        }
     }
-    
+
     const handleDelete = (e) => {
         e.preventDefault();
-        Inertia.delete(route('backend.categories.destroy', data));
+        del(route(`backend.${model}.destroy`, data));
     }
 
     const lists = [
         {
-            title: (<Link href={route('backend.categories.edit', data)} className="flex items-center space-x-2"><IoCreateOutline className="w-5 h-5" /><span className="block">Edit</span></Link>),
-            button: false
+            title: (<Link href={route(`backend.${model}.edit`, data)} className="flex items-center space-x-2"><IoCreateOutline className="w-5 h-5" /><span className="block">Edit</span></Link>),
+            button: false,
+            type: 'edit'
         },
         {
             title: (<span className="w-full flex items-center space-x-2"><RiDeleteBin6Line className="w-5 h-5" /><span className="block">Delete</span></span>),
-            button: true
+            button: true,
+            type: 'delete'
+        },
+        {
+            title: 'Status',
+            button: true,
+            type: 'editStatus'
         }
     ];
     return (
@@ -41,7 +56,7 @@ function TableAction({ data }) {
                 <HiDotsHorizontal className="w-6 h-6 text-gray-600" />
             </ButtonRoundedHover>
 
-            <NormalDropdown width="w-36" isOpen={isOpen} clickButton={handleOpenModal} listItem={lists} to="right-0" handleClose={() => setIsOpen(false)} />
+            <NormalDropdown width="w-36" isOpen={isOpen} clickButton={handleClick} listItem={lists} to="right-0" handleClose={() => setIsOpen(false)} />
 
             <ModalComponent open={openModal}>
                 <div className="py-6 w-full text-center flex flex-col items-center space-y-4">
@@ -50,7 +65,7 @@ function TableAction({ data }) {
                     </div>
                     <div className="flex flex-row items-center justify-center space-x-4">
                         <Button handleClick={() => setOpenModal(false)} className="bg-yellow-500 focus:ring-2 ring-yellow-300 focus:ring-offset-1">Cancel</Button>
-                        <Button handleClick={handleDelete} className="bg-red-500 focus:ring-2 ring-red-300 focus:ring-offset-1">Delete</Button>
+                        <Button handleClick={handleDelete} className="bg-red-500 focus:ring-2 ring-red-300 focus:ring-offset-1">Delete</Button>``
                     </div>
                 </div>
             </ModalComponent>

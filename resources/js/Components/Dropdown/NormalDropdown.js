@@ -41,7 +41,7 @@ function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', w
                                     const checkHandleClick = item.button && clickButton ? clickButton : undefined
                                     return (
                                         type.name === 'button' ? (
-                                            <button onClick={checkHandleClick} key={index} className={`block py-2 w-full px-5 truncate text-gray-600 text-sm md:text-base hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out ${className}`}>{item.title}</button>
+                                            <button onClick={(e) => checkHandleClick(e, item.type)} key={index} className={`block py-2 w-full px-5 truncate text-gray-600 text-sm md:text-base text-left hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out ${className}`}>{item.title}</button>
                                         ) : (
                                             <Link key={index} href={href} className={`block py-2 px-5 truncate text-sm md:text-base cursor-pointer transition duration-150 ease-in-out ${type.is === 'sort' ? value == item.sort ? 'bg-blue-500 text-white hover:bg-blue-600' : 'hover:bg-gray-100 text-gray-600' : 'hover:bg-gray-100 text-gray-600'} ${className}`}>{item.title}</Link>
                                         )

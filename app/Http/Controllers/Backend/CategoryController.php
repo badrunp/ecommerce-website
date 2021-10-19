@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $category = Category::sorting($request->query('sorting'))->search($request->query('search'))->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
+        $category = Category::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'slug', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Category/Category', [
             'categories' => $category,
             'queries' => $request->query()
@@ -90,6 +90,14 @@ class CategoryController extends Controller
 
         $category->delete();
 
+        return redirect()->route('backend.categories.index');
+    }
+    
+    public function updateStatus(Category $category){
+        $category->update([
+            'status' => $category->status == 'active' ? 'unactive' : 'active'
+        ]);
+        
         return redirect()->route('backend.categories.index');
     }
 }

@@ -43,10 +43,10 @@ function Category({ categories, queries = {} }) {
                         </div>
                         <div className="relative">
                             <ButtonDropdown handleClick={() => setIsPerPage(!isPerPage)}>
-                                <span className="block text-xs md:text-base">{queries && queries.limit ? queries.limit : 5}</span>
+                                <span className="block text-xs md:text-base">{queries && queries.limit ? queries.limit : 10}</span>
                                 <IoIosArrowDown />
                             </ButtonDropdown>
-                            <NormalDropdown type={{ name: 'link', is: 'sort' }} query="limit" value={queries && queries.limit ? queries.limit : 5} className="px-8" listItem={perPage} isOpen={isPerPage} handleClose={() => setIsPerPage(false)} />
+                            <NormalDropdown type={{ name: 'link', is: 'sort' }} query="limit" value={queries && queries.limit ? queries.limit : 10} className="px-8" listItem={perPage} isOpen={isPerPage} handleClose={() => setIsPerPage(false)} />
                         </div>
                         <LinkOutline link={route('backend.categories.create')}>
                             <IoCreateOutline className="h-4 w-4 md:w-6 md:h-6" />
@@ -78,7 +78,7 @@ function Category({ categories, queries = {} }) {
                             const evenHoverClass = index % 2 == 1 ? 'bg-gray-50 bg-opacity-50' : 'bg-white'
                             return (
                                 <Table.Tr key={data.id} evenHoverClass={evenHoverClass}>
-                                    <Table.Td>{data.id}</Table.Td>
+                                    <Table.Td>{index + categories.from}</Table.Td>
                                     <Table.Td>{data.name}</Table.Td>
                                     <Table.Td>{data.slug}</Table.Td>
                                     <Table.Td>
@@ -91,7 +91,7 @@ function Category({ categories, queries = {} }) {
                                         }
                                     </Table.Td>
                                     <Table.Td>
-                                        <TableAction data={data} />
+                                        <TableAction data={data} model="categories" />
                                     </Table.Td>
                                 </Table.Tr>
                             )
