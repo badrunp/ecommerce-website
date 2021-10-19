@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'file'];
+    protected $fillable = ['name', 'slug', 'image'];
 
     public function scopeSorting($query, $sorting)
     {

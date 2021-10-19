@@ -35,6 +35,7 @@ Route::prefix('dashboard')->middleware(['auth'])->name('backend.')->group(functi
     })->name('dashboard');
 
     Route::get('/dashboard/categories/search', [CategoryController::class, 'search'])->name('categories.search');
+    Route::post('/dashboard/categories/{category}/update', [CategoryController::class, 'categoryUpdate'])->name('categories.categoryUpdate');
     Route::resource('categories', CategoryController::class)->scoped([
         'category' => 'slug'
     ]);

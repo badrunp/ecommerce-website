@@ -81,10 +81,17 @@ function Category({ categories, queries = {} }) {
                                     <Table.Td>{data.id}</Table.Td>
                                     <Table.Td>{data.name}</Table.Td>
                                     <Table.Td>{data.slug}</Table.Td>
-                                    <Table.Td>{data.status}</Table.Td>
+                                    <Table.Td>
+                                        {
+                                            data.status === 'active' ? (
+                                                <span className="block text-sm md:text-base font-semibold text-green-500">[Active]</span>
+                                            ) : (
+                                                <span className="block text-sm md:text-base font-semibold text-red-500">[Un Active]</span>
+                                            )
+                                        }
+                                    </Table.Td>
                                     <Table.Td>
                                         <TableAction data={data} />
-
                                     </Table.Td>
                                 </Table.Tr>
                             )

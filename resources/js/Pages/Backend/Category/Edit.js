@@ -9,14 +9,16 @@ import React from 'react'
 import { IoCreateOutline } from 'react-icons/io5'
 
 function Edit({category}) {
-    const { data, setData, put, errors } = useForm({
+    const { data, setData, post, errors } = useForm({
         name: category.name,
-        image: ''
+        image: category.image,
+        newimage: ''
     })
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        put(route('backend.categories.update', category));
+        post(route('backend.categories.categoryUpdate', category));
     }
 
     const headers = [
@@ -54,7 +56,15 @@ function Edit({category}) {
                         <div className="mt-6">
                             <Label forInput="image" value="Image" />
 
-                            <Input type="file" name="image" className="mt-2 block w-full" handleChange={(e) => setData('image', e.target.files[0])} />
+                            <Input type="file" name="newimage" className="mt-2 block w-full" handleChange={(e) => setData('newimage', e.target.files[0])} />
+
+                            {
+                                data.image !== null && (
+                                    <div className="mt-4 md:mt-6 overflow-hidden">
+                                        <img className="w-28" src={`http://localhost:8000/storage/${data.image}`} alt="category image" />
+                                    </div>
+                                )
+                            }
 
                             {errors.image && (
                                 <ErrorMessage error={errors.image} />

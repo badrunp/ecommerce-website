@@ -19,7 +19,7 @@ const modalVariants = {
     },
     exit: {
         opacity: 0,
-        y: 300,
+        y: -300,
         transition: {
             type: 'tween'
         }

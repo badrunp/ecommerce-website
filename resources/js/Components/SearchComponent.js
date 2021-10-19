@@ -1,5 +1,4 @@
 import { Inertia } from '@inertiajs/inertia';
-import { Link, useForm, usePage } from '@inertiajs/inertia-react'
 import React from 'react'
 import { BiSearch } from 'react-icons/bi'
 
@@ -8,10 +7,7 @@ function SeacrhComponent({ width = 'w-full', value = '', placeholder = 'Search..
     const handleSubmit = (e) => {
         e.preventDefault();
         let queries = query;
-        queries.search = value
-
-        console.log(queries);
-        
+        queries.search = value        
         Inertia.get(route('backend.categories.index', query))
         
     }
