@@ -4,7 +4,7 @@ import LinkOutline from '@/Components/LinkOutline'
 import SeacrhComponent from '@/Components/SearchComponent'
 import Table from '@/Components/Table'
 import Authenticated from '@/Layouts/Authenticated'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoCreateOutline } from 'react-icons/io5';
 import { BiSearch } from 'react-icons/bi'
@@ -15,6 +15,8 @@ import TableAction from '@/Components/TableAction'
 import Pagination from '@/Components/Pagination'
 import { listDropdownSorting, perPage } from '@/Config/menu/dashboard/category'
 import { searchTableVariants } from '@/Config/variants/search'
+
+const fieldTable = ['Id', 'Name', 'Slug', 'Status', 'Action'];
 
 
 function Category({ categories, queries = {} }) {
@@ -72,9 +74,9 @@ function Category({ categories, queries = {} }) {
                 }
             </AnimatePresence>
             <div className="bg-white relative w-full overflow-x-auto shadow rounded px-4 md:px-8 py-6 md:py-8">
-                <Table columns={['Id', 'Name', 'Slug', 'Status', 'Action']} >
+                <Table columns={fieldTable} >
                     {
-                        categories && categories.data.map((data, index) => {
+                        categories && categories.data.length > 0 ? categories.data.map((data, index) => {
                             const evenHoverClass = index % 2 == 1 ? 'bg-gray-50 bg-opacity-50' : 'bg-white'
                             return (
                                 <Table.Tr key={data.id} evenHoverClass={evenHoverClass}>
@@ -84,9 +86,9 @@ function Category({ categories, queries = {} }) {
                                     <Table.Td>
                                         {
                                             data.status === 'active' ? (
-                                                <span className="block text-sm md:text-base font-semibold text-green-500">[Active]</span>
+                                                <span className="block text-sm md:text-base tracking-tighter font-semibold text-green-500">[Active]</span>
                                             ) : (
-                                                <span className="block text-sm md:text-base font-semibold text-red-500">[Un Active]</span>
+                                                <span className="block text-sm md:text-base tracking-tighter font-semibold text-red-500">[Un Active]</span>
                                             )
                                         }
                                     </Table.Td>
@@ -95,7 +97,13 @@ function Category({ categories, queries = {} }) {
                                     </Table.Td>
                                 </Table.Tr>
                             )
-                        })
+                        }) : (
+                            <>
+                                <Table.Tr>
+                                    <Table.Td colspan={fieldTable.length} className="text-center">{queries && queries.search ? (<span className="inline-block">Categories <span className="inline-block font-semibold">{` ${queries.search} `}</span> not found!</span>) : 'Categories is empty!'}</Table.Td>
+                                </Table.Tr>
+                            </>
+                        )
                     }
                 </Table>
 

@@ -8,6 +8,7 @@ import NormalDropdown from './Dropdown/NormalDropdown';
 import Overlay from './Overlay';
 import Button from './Button';
 import ModalComponent from './Modal';
+import {HiStatusOffline, HiStatusOnline} from 'react-icons/hi';
 
 
 function TableAction({ data, model = '' }) {
@@ -45,7 +46,7 @@ function TableAction({ data, model = '' }) {
             type: 'delete'
         },
         {
-            title: 'Status',
+            title: <span className="w-full flex items-center space-x-2">{data.status === 'active' ? (<><HiStatusOffline className="w-5 h-5" /><span className="block">Un Active</span></>) : (<><HiStatusOnline className="w-5 h-5" /><span className="block">Active</span></>)}</span>,
             button: true,
             type: 'editStatus'
         }
@@ -56,7 +57,7 @@ function TableAction({ data, model = '' }) {
                 <HiDotsHorizontal className="w-6 h-6 text-gray-600" />
             </ButtonRoundedHover>
 
-            <NormalDropdown width="w-36" isOpen={isOpen} clickButton={handleClick} listItem={lists} to="right-0" handleClose={() => setIsOpen(false)} />
+            <NormalDropdown width="w-44" isOpen={isOpen} clickButton={handleClick} listItem={lists} to="right-0" handleClose={() => setIsOpen(false)} />
 
             <ModalComponent open={openModal}>
                 <div className="py-6 w-full text-center flex flex-col items-center space-y-4">
