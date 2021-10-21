@@ -29,7 +29,7 @@ function Edit({category}) {
     ]
 
     return (
-        <Authenticated headers={headers}>
+        <Authenticated headers={headers} title="Dashboard | Edit Category">
             <ContainerComponent className="w-full md:max-w-xl">
                 <div className="py-4">
                     <form onSubmit={handleSubmit}>

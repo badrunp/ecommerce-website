@@ -8,14 +8,14 @@ import { minSidebarHide } from '@/Config/app';
 import Sidebar from '@/Components/Dashboard/Sidebar/Sidebar';
 
 
-export default function Authenticated({ children, headers }) {
+export default function Authenticated({ children, headers, title = 'Dashboard' }) {
     const { width } = Resize();
     const [sidebarOpen, setSidebarOpen] = useState(width > minSidebarHide ? true : false);
     const { url } = usePage();
 
     return (
         <>
-            <Head title="Dashboard" />
+            <Head title={title} />
 
             <div className="relative w-full h-screen overflow-hidden bg-gray-100">
                 <div className="flex flex-row">

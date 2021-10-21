@@ -4,7 +4,7 @@ import Authenticated from '@/Layouts/Authenticated';
 
 export default function Dashboard(props) {
     return (
-        <Authenticated>
+        <Authenticated headers={['Home']} title="Dashboard | Home">
             test
         </Authenticated>
     )

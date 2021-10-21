@@ -27,7 +27,7 @@ function Create() {
     ]
 
     return (
-        <Authenticated headers={headers}>
+        <Authenticated headers={headers} title="Dashboard | Create Category">
             <ContainerComponent className="w-full md:max-w-xl">
                 <div className="py-4">
                     <form onSubmit={handleSubmit}>

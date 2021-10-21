@@ -32,7 +32,7 @@ function Category({ categories, queries = {} }) {
 
 
     return (
-        <Authenticated headers={['Dashboard', 'Categories']}>
+        <Authenticated headers={['Dashboard', 'Categories']} title="Dashboard | Categories">
             <ContainerComponent className="mb-3">
                 <div className="flex flex-row items-center justify-between space-x-5 md:space-x-8">
                     <div className="flex flex-row items-center space-x-2 md:space-x-4">
