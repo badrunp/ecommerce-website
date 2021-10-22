@@ -21,7 +21,7 @@ class ColorController extends Controller
     }
     public function create()
     {
-        return Inertia::render('Backend/Color/Color');
+        return Inertia::render('Backend/Color/Create');
     }
 
     public function store(Request $request)
@@ -54,10 +54,10 @@ class ColorController extends Controller
 
     public function update(){}
 
-    public function categoryUpdate(Request $request, Color $color)
+    public function colorUpdate(Request $request, Color $color)
     {
         $request->validate([
-            'name' => 'required|colors,name,' . $color->id,
+            'name' => 'required|unique:colors,name,' . $color->id,
         ]);
 
         $slug = Str::slug($request->name);

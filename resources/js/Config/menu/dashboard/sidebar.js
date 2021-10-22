@@ -35,7 +35,7 @@ const menuSidebars = [
             {
                 id: 2,
                 title: 'Colors',
-                link: route('login'),
+                link: route('backend.colors.index'),
                 icon: BiColorFill,
                 mt: true,
             },

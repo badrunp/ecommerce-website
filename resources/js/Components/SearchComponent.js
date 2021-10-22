@@ -2,13 +2,13 @@ import { Inertia } from '@inertiajs/inertia';
 import React from 'react'
 import { BiSearch } from 'react-icons/bi'
 
-function SeacrhComponent({ width = 'w-full', value = '', placeholder = 'Search...', className, handleChange, query }) {
+function SeacrhComponent({ width = 'w-full', value = '', placeholder = 'Search...', className, handleChange, query, redirect = '' }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
         let queries = query;
         queries.search = value        
-        Inertia.get(route('backend.categories.index', query))
+        Inertia.get(route(`backend.${redirect}.index`, query))
         
     }
 

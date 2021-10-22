@@ -44,10 +44,10 @@ Route::prefix('dashboard')->middleware(['auth'])->name('backend.')->group(functi
     ]);
 
     // Colors
-    Route::get('/dashboard/colors/search', [ColorController::class, 'search'])->name('colors.search');
-    Route::post('/dashboard/colors/{category}/update', [ColorController::class, 'colorUpdate'])->name('colors.categoryUpdate');
-    Route::post('/dashboard/colors/{category}/status', [ColorController::class, 'updateStatus'])->name('colors.updateStatus');
-    Route::resource('colors', ColorController::class)->scoped([
+    Route::get('/dashboard/products/colors/search', [ColorController::class, 'search'])->name('colors.search');
+    Route::post('/dashboard/products/colors/{color}/update', [ColorController::class, 'colorUpdate'])->name('colors.colorUpdate');
+    Route::post('/dashboard/products/colors/{color}/status', [ColorController::class, 'updateStatus'])->name('colors.updateStatus');
+    Route::resource('/products/colors', ColorController::class)->scoped([
         'color' => 'slug'
     ]);
 });

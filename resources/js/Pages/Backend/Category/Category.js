@@ -59,7 +59,7 @@ function Category({ categories, queries = {} }) {
                         <BiSearch className="h-4 w-4 md:w-6 md:h-6 text-gray-600" />
                     </ButtonRoundedHover>
 
-                    <SeacrhComponent query={queries.length === 0 ? {} : queries} value={search} handleChange={handleSearch} placeholder="Search..." className="hidden lg:flex lg:justify-end lg:items-center" width="auto" />
+                    <SeacrhComponent redirect="categories" query={queries.length === 0 ? {} : queries} value={search} handleChange={handleSearch} placeholder="Search..." className="hidden lg:flex lg:justify-end lg:items-center" width="auto" />
                 </div>
             </ContainerComponent>
             <AnimatePresence>
@@ -67,7 +67,7 @@ function Category({ categories, queries = {} }) {
                     isOpenSearch && (
                         <motion.div variants={searchTableVariants} initial="hidden" animate="visible" exit="hidden">
                             <ContainerComponent className="block lg:hidden" rounded="rounded">
-                                <SeacrhComponent query={queries.length === 0 ? {} : queries} value={search} handleChange={handleSearch} placeholder="Search for categories..." />
+                                <SeacrhComponent redirect="categories" query={queries.length === 0 ? {} : queries} value={search} handleChange={handleSearch} placeholder="Search for categories..." />
                             </ContainerComponent>
                         </motion.div>
                     )
