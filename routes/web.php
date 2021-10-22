@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ColorController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,11 +35,20 @@ Route::prefix('dashboard')->middleware(['auth'])->name('backend.')->group(functi
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    // Category
     Route::get('/dashboard/categories/search', [CategoryController::class, 'search'])->name('categories.search');
     Route::post('/dashboard/categories/{category}/update', [CategoryController::class, 'categoryUpdate'])->name('categories.categoryUpdate');
     Route::post('/dashboard/categories/{category}/status', [CategoryController::class, 'updateStatus'])->name('categories.updateStatus');
     Route::resource('categories', CategoryController::class)->scoped([
         'category' => 'slug'
+    ]);
+
+    // Colors
+    Route::get('/dashboard/colors/search', [ColorController::class, 'search'])->name('colors.search');
+    Route::post('/dashboard/colors/{category}/update', [ColorController::class, 'colorUpdate'])->name('colors.categoryUpdate');
+    Route::post('/dashboard/colors/{category}/status', [ColorController::class, 'updateStatus'])->name('colors.updateStatus');
+    Route::resource('colors', ColorController::class)->scoped([
+        'color' => 'slug'
     ]);
 });
 
