@@ -4,6 +4,7 @@ namespace Database\Factories\Backend;
 
 use App\Models\Backend\Color;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ColorFactory extends Factory
 {
@@ -21,8 +22,11 @@ class ColorFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->text('15');
+        $slug = Str::slug($name);
         return [
-            //
+            'name' => $name,
+            'slug' => $slug
         ];
     }
 }
