@@ -2,31 +2,13 @@
 
 namespace App\Models\Backend;
 
+use App\Traits\QueryDatabaseTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Color extends Model
 {
-    use HasFactory;
+    use HasFactory, QueryDatabaseTrait;
 
     protected $fillable = ['name', 'slug', 'status'];
-
-    public function scopeSorting($query, $sorting)
-    {
-        return $query->when($sorting, function ($query, $sorting) {
-            if ($sorting === 'oldest') {
-                return $query->orderBy('created_at', 'ASC');
-            } else {
-                return $query->orderBy('created_at', 'DESC');
-            }
-        }, function ($query) {
-            return $query->orderBy('created_at', 'DESC');
-        });
-    }
-
-    public function scopeSearch($query, $search){
-        return $query->when($search, function($query, $search){
-            return $query->where('name', 'like', '%'.$search.'%');
-        });
-    }
 }
