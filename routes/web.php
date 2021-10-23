@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ColorController;
+use App\Http\Controllers\Backend\SizeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -49,6 +50,14 @@ Route::prefix('dashboard')->middleware(['auth'])->name('backend.')->group(functi
     Route::post('/dashboard/products/colors/{color}/status', [ColorController::class, 'updateStatus'])->name('colors.updateStatus');
     Route::resource('/products/colors', ColorController::class)->scoped([
         'color' => 'slug'
+    ]);
+
+    // Colors
+    Route::get('/dashboard/products/sizes/search', [SizeController::class, 'search'])->name('sizes.search');
+    Route::post('/dashboard/products/sizes/{size}/update', [SizeController::class, 'sizeUpdate'])->name('sizes.sizeUpdate');
+    Route::post('/dashboard/products/sizes/{size}/status', [SizeController::class, 'updateStatus'])->name('sizes.updateStatus');
+    Route::resource('/products/sizes', SizeController::class)->scoped([
+        'size' => 'slug'
     ]);
 });
 
