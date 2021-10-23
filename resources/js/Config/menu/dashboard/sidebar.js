@@ -42,7 +42,7 @@ const menuSidebars = [
             {
                 id: 3,
                 title: 'Sizes',
-                link: route('login'),
+                link: route('backend.sizes.index'),
                 icon: BiFontSize,
                 mt: true,
             }

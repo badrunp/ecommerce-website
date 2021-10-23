@@ -32,7 +32,7 @@ class SizeController extends Controller
         $slug = Str::slug($request->name);
 
         Size::create([
-            'name' => $request->name,
+            'name' => strtoupper($request->name),
             'slug' => $slug,
         ]);
         
@@ -56,12 +56,12 @@ class SizeController extends Controller
     public function sizeUpdate(Request $request, Size $size)
     {
         $request->validate([
-            'name' => 'required|unique:size,name,' . $size->id,
+            'name' => 'required|unique:sizes,name,' . $size->id,
         ]);
 
         $slug = Str::slug($request->name);
         $size->update([
-            'name' => $request->name,
+            'name' => strtoupper($request->name),
             'slug' => $slug,
         ]);
 
