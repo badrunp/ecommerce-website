@@ -1,16 +1,7 @@
+import { overlayVariants } from '@/Config/variants/overlay'
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
 
-const overlayVariants = {
-    hidden: i => ({
-        opacity: 0,
-        zIndex: i
-    }),
-    visible: i => ({
-        opacity: 1,
-        zIndex: i
-    })
-}
 
 function Overlay({ width = window.outerWidth, min = window.outerWidth, open, setOpen, zIndex = 50 }) {
     return (

@@ -2,20 +2,8 @@ import React from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/inertia-react';
 import { motion } from 'framer-motion';
+import { logoVariants } from '@/Config/variants/logo';
 
-const logoVariants = {
-    hidden: {
-        opacity: 0,
-        y: -100
-    },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            delay: .2
-        }
-    }
-}
 
 export default function Guest({ children }) {
     return (
