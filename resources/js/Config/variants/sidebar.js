@@ -6,7 +6,7 @@ const itemSidebarVariants = {
     visible: i => ({
         x: 0,
         transition: {
-            delay: i / 10,
+            delay: i / 15,
             type: 'spring',
             stiffness: 300,
             damping: 30
@@ -23,14 +23,14 @@ const menuSidebarVariants = {
         height: 0,
         zIndex: -1
     },
-    visible: {
+    visible: h => ({
         opacity: 1,
-        height: 160,
+        height: h,
         transition: {
             duration: .2,
             type: 'tween'
         }
-    },
+    }),
     exit: {
         opacity: 0,
         height: 0,

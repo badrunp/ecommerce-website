@@ -37,10 +37,10 @@ Route::prefix('dashboard')->middleware(['auth'])->name('backend.')->group(functi
     })->name('dashboard');
 
     // Category
-    Route::get('/dashboard/categories/search', [CategoryController::class, 'search'])->name('categories.search');
-    Route::post('/dashboard/categories/{category}/update', [CategoryController::class, 'categoryUpdate'])->name('categories.categoryUpdate');
-    Route::post('/dashboard/categories/{category}/status', [CategoryController::class, 'updateStatus'])->name('categories.updateStatus');
-    Route::resource('categories', CategoryController::class)->scoped([
+    Route::get('/dashboard/products/categories/search', [CategoryController::class, 'search'])->name('categories.search');
+    Route::post('/dashboard/products/categories/{category}/update', [CategoryController::class, 'categoryUpdate'])->name('categories.categoryUpdate');
+    Route::post('/dashboard/products/categories/{category}/status', [CategoryController::class, 'updateStatus'])->name('categories.updateStatus');
+    Route::resource('/products/categories', CategoryController::class)->scoped([
         'category' => 'slug'
     ]);
 

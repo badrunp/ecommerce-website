@@ -45,15 +45,15 @@ const menuSidebars = [
                 link: route('backend.sizes.index'),
                 icon: BiFontSize,
                 mt: true,
+            },
+            {
+                id: 4,
+                title: 'Categories',
+                link: route('backend.categories.index'),
+                icon: IoListOutline,
+                mt: true,
             }
         ]
-    },
-    {
-        id: 4,
-        title: 'Categories',
-        link: route('backend.categories.index'),
-        icon: IoListOutline,
-        mt: true,
     },
     {
         id: 5,
