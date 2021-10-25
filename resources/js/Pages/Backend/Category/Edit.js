@@ -84,7 +84,7 @@ function Edit({category}) {
                         </div>
                     </form>
                 </div>
-            </ContainerComponent>
+            </ContainerComponent> 
         </Authenticated>
     )
 }

@@ -52,6 +52,13 @@ const menuSidebars = [
                 link: route('backend.categories.index'),
                 icon: IoListOutline,
                 mt: true,
+            },
+            {
+                id: 5,
+                title: 'Brands',
+                link: route('backend.brands.index'),
+                icon: IoListOutline,
+                mt: true,
             }
         ]
     },

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ColorController;
 use App\Http\Controllers\Backend\SizeController;
@@ -52,12 +53,20 @@ Route::prefix('dashboard')->middleware(['auth'])->name('backend.')->group(functi
         'color' => 'slug'
     ]);
 
-    // Colors
+    // Sizes
     Route::get('/dashboard/products/sizes/search', [SizeController::class, 'search'])->name('sizes.search');
     Route::post('/dashboard/products/sizes/{size}/update', [SizeController::class, 'sizeUpdate'])->name('sizes.sizeUpdate');
     Route::post('/dashboard/products/sizes/{size}/status', [SizeController::class, 'updateStatus'])->name('sizes.updateStatus');
     Route::resource('/products/sizes', SizeController::class)->scoped([
         'size' => 'slug'
+    ]);
+
+    // Brands
+    Route::get('/dashboard/products/brands/search', [BrandController::class, 'search'])->name('brands.search');
+    Route::post('/dashboard/products/brands/{brand}/update', [BrandController::class, 'brandUpdate'])->name('brands.brandUpdate');
+    Route::post('/dashboard/products/brands/{brand}/status', [BrandController::class, 'updateStatus'])->name('brands.updateStatus');
+    Route::resource('/products/brands', BrandController::class)->scoped([
+        'brand' => 'slug'
     ]);
 });
 

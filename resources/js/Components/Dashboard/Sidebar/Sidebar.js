@@ -44,7 +44,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, width }) {
                                 <AnimatePresence key={index} exitBeforeEnter>
                                     {
                                         menu.children && menu.children.length > 0 && openItemSidebar[index] && (
-                                            <motion.div variants={menuSidebarVariants} custom={220} initial={initial ? false : 'hidden'} animate="visible" exit="exit" className="w-full bg-gray-50 flex flex-col items-start justify-center overflow-hidden rounded-md space-y-6">
+                                            <motion.div variants={menuSidebarVariants} custom={280} initial={initial ? false : 'hidden'} animate="visible" exit="exit" className="w-full bg-gray-50 flex flex-col items-start justify-center overflow-hidden rounded-md space-y-6">
                                                 {
                                                     menu.children.map((chil, i) => (
                                                         <SidebarSubItem key={chil.id} index={i} data={chil} />

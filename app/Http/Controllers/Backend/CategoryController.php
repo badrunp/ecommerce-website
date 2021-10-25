@@ -36,6 +36,7 @@ class CategoryController extends Controller
         Category::create([
             'name' => $request->name,
             'slug' => $slug,
+            'status' => 'active',
             'image' => $request->hasFile('image') ? $request->file('image')->store('images/category') : null,
             'is_home' => $request->boolean('is_home')
         ]);

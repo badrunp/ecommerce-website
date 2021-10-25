@@ -55,9 +55,7 @@ function NavbarRight(props) {
     const handleLogout = (e, method) => {
         if (method != "GET") {
             e.preventDefault()
-            post('logout', {
-                method: 'DELETE'
-            })
+            post(route('logout'))
         }
     }
 
