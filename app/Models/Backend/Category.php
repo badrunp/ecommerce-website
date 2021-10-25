@@ -10,6 +10,6 @@ class Category extends Model
 {
     use HasFactory, QueryDatabaseTrait;
 
-    protected $fillable = ['name', 'slug', 'image', 'status'];
+    protected $fillable = ['name', 'slug', 'image', 'is_home', 'status'];
 
 }

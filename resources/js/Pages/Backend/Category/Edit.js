@@ -1,4 +1,5 @@
 import Button from '@/Components/Button'
+import Checkbox from '@/Components/Checkbox'
 import ContainerComponent from '@/Components/ContainerComponent'
 import ErrorMessage from '@/Components/ErrorMessage'
 import Input from '@/Components/Input'
@@ -12,7 +13,8 @@ function Edit({category}) {
     const { data, setData, post, errors } = useForm({
         name: category.name,
         image: category.image,
-        newimage: ''
+        newimage: '',
+        is_home: category.is_home === 1 ? true : false
     })
 
 
@@ -69,6 +71,12 @@ function Edit({category}) {
                             {errors.image && (
                                 <ErrorMessage error={errors.image} />
                             )}
+                        </div>
+
+                        <div className="mt-6 flex space-x-2">
+                            <Checkbox value={data.is_home} name="is_home" handleChange={(e) => setData('is_home', e.target.checked)} />
+
+                            <Label forInput="is_home" value="Is Home" />
                         </div>
 
                         <div className="mt-6">

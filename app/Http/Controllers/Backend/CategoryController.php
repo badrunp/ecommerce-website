@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $category = Category::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'slug', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
+        $category = Category::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'slug','is_home', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Category/Category', [
             'categories' => $category,
             'queries' => $request->query()
@@ -36,7 +36,8 @@ class CategoryController extends Controller
         Category::create([
             'name' => $request->name,
             'slug' => $slug,
-            'image' => $request->hasFile('image') ? $request->file('image')->store('images/category') : null
+            'image' => $request->hasFile('image') ? $request->file('image')->store('images/category') : null,
+            'is_home' => $request->boolean('is_home')
         ]);
         
         return redirect()->route('backend.categories.index');
@@ -76,7 +77,8 @@ class CategoryController extends Controller
         $category->update([
             'name' => $request->name,
             'slug' => $slug,
-            'image' => $image
+            'image' => $image,
+            'is_home' => $request->boolean('is_home')
         ]);
 
         return redirect()->route('backend.categories.index');
