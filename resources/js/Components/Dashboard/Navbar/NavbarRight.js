@@ -5,28 +5,9 @@ import ButtonRoundedHover from '../../ButtonRoundedHover'
 import image from '../../../Assets/images/unnamed.jpg'
 import { Link, useForm } from '@inertiajs/inertia-react'
 import { AnimatePresence, motion } from 'framer-motion';
-import { userDropdownVariants } from '@/Config/variants/navbar'
+import { userDropdownVariants, userNotifVariants } from '@/Config/variants/navbar'
 import { menuUserNavbarDropdown } from '@/Config/menu/dashboard/navbar'
 
-
-const userNotifVariants = {
-    hidden: {
-        opacity: 0,
-        y: 100,
-        transition: {
-            duration: .2
-        }
-    },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            type: 'spring',
-            damping: 30,
-            stiffness: 300
-        }
-    }
-}
 
 function NavbarRight(props) {
     const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -108,6 +89,7 @@ function NavbarRight(props) {
                                                 <img src={image} alt="image profil" className="object-cover bg-center rounded-full w-full h-full" />
                                             </div>
                                             <h3 className="block text-base truncate font-bold text-gray-600 tracking-tight">Muhammad Badrun</h3>
+                                            <h3 className="block text-base truncate font-bold text-gray-600 tracking-tight">bbadrunn@gmail.com</h3>
                                             <h5 className="block text-blue-500 text-sm font-bold">(Admin)</h5>
                                         </div>
                                     </div>
