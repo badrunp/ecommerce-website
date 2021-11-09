@@ -100,7 +100,7 @@ function Brand({ brands, queries = {} }) {
                         }) : (
                             <>
                                 <Table.Tr>
-                                    <Table.Td colspan={fieldTable.length} className="text-center">{queries && queries.search ? (<span className="inline-block">brands <span className="inline-block font-semibold">{` ${queries.search} `}</span> not found!</span>) : 'brands is empty!'}</Table.Td>
+                                    <Table.Td colSpan={fieldTable.length} className="text-center">{queries && queries.search ? (<span className="inline-block">brands <span className="inline-block font-semibold">{` ${queries.search} `}</span> not found!</span>) : 'brands is empty!'}</Table.Td>
                                 </Table.Tr>
                             </>
                         )

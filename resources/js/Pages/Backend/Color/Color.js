@@ -100,7 +100,7 @@ function Color({ colors, queries = {} }) {
                         }) : (
                             <>
                                 <Table.Tr>
-                                    <Table.Td colspan={fieldTable.length} className="text-center">{queries && queries.search ? (<span className="inline-block">Colors <span className="inline-block font-semibold">{` ${queries.search} `}</span> not found!</span>) : 'Colors is empty!'}</Table.Td>
+                                    <Table.Td colSpan={fieldTable.length} className="text-center">{queries && queries.search ? (<span className="inline-block">Colors <span className="inline-block font-semibold">{` ${queries.search} `}</span> not found!</span>) : 'Colors is empty!'}</Table.Td>
                                 </Table.Tr>
                             </>
                         )

@@ -100,7 +100,7 @@ function Category({ categories, queries = {} }) {
                         }) : (
                             <>
                                 <Table.Tr>
-                                    <Table.Td colspan={fieldTable.length} className="text-center">{queries && queries.search ? (<span className="inline-block">Categories <span className="inline-block font-semibold">{` ${queries.search} `}</span> not found!</span>) : 'Categories is empty!'}</Table.Td>
+                                    <Table.Td colSpan={fieldTable.length} className="text-center">{queries && queries.search ? (<span className="inline-block">Categories <span className="inline-block font-semibold">{` ${queries.search} `}</span> not found!</span>) : 'Categories is empty!'}</Table.Td>
                                 </Table.Tr>
                             </>
                         )
