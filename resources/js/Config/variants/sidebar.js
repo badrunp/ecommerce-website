@@ -1,15 +1,17 @@
 
 const itemSidebarVariants = {
     hidden: {
-        x: -100
+        x: -100,
+        opacity: 0
     },
     visible: i => ({
         x: 0,
+        opacity: 1,
         transition: {
-            delay: i / 15,
             type: 'spring',
             stiffness: 300,
-            damping: 30
+            damping: 30,
+            delay: .2
         }
     }),
     exit: {
