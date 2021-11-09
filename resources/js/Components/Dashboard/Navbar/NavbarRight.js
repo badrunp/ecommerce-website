@@ -7,6 +7,7 @@ import { Link, useForm } from '@inertiajs/inertia-react'
 import { AnimatePresence, motion } from 'framer-motion';
 import { userDropdownVariants, userNotifVariants } from '@/Config/variants/navbar'
 import { menuUserNavbarDropdown } from '@/Config/menu/dashboard/navbar'
+import { AuthContext } from '@/app'
 
 
 function NavbarRight(props) {
@@ -15,6 +16,8 @@ function NavbarRight(props) {
     const refUserDropdown = useRef(null);
     const refNotifDropdown = useRef(null);
     const { post } = useForm()
+
+    const auth = React.useContext(AuthContext);
 
     useEffect(() => {
         window.addEventListener('click', handleClickWindow);
@@ -88,8 +91,8 @@ function NavbarRight(props) {
                                             <div className="w-16 mb-2" style={{ height: 66 }}>
                                                 <img src={image} alt="image profil" className="object-cover bg-center rounded-full w-full h-full" />
                                             </div>
-                                            <h3 className="block text-base truncate font-bold text-gray-600 tracking-tight">Muhammad Badrun</h3>
-                                            <h3 className="block text-base truncate font-bold text-gray-600 tracking-tight">bbadrunn@gmail.com</h3>
+                                            <h3 className="block text-base truncate font-bold text-gray-600 tracking-tight">{auth && auth.name}</h3>
+                                            <h3 className="block text-base truncate font-bold text-gray-600 tracking-tight">{auth && auth.email}</h3>
                                             <h5 className="block text-blue-500 text-sm font-bold">(Admin)</h5>
                                         </div>
                                     </div>

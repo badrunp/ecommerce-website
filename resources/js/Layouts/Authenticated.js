@@ -7,7 +7,6 @@ import { containerVariants } from '@/Config/variants/navbar';
 import { minSidebarHide } from '@/Config/app';
 import Sidebar from '@/Components/Dashboard/Sidebar/Sidebar';
 
-
 export default function Authenticated({ children, headers, title = 'Dashboard' }) {
     const { width } = Resize();
     const [sidebarOpen, setSidebarOpen] = useState(width > minSidebarHide ? true : false);

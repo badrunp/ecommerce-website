@@ -7,12 +7,19 @@ import { InertiaProgress } from '@inertiajs/progress';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
+export const AuthContext = React.createContext(null);
+
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => require(`./Pages/${name}`),
     setup({ el, App, props }) {
-        console.log(props);
-        return render(<App {...props} />, el);
+        const auth = props.initialPage.props.auth.user;
+        return render(
+            <AuthContext.Provider value={auth}>
+                <App {...props} />
+            </AuthContext.Provider>,
+            el
+        );
     },
 });
 
