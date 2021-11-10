@@ -38,14 +38,14 @@ function Brand({ brands, queries = {} }) {
                     <div className="flex flex-row items-center space-x-2 md:space-x-4">
                         <div className="relative">
                             <ButtonDropdown handleClick={() => setIsDropdownSorting(!isDropdownSorting)}>
-                                <span className="block text-xs md:text-base">Sorting</span>
+                                <span className="block text-xs md:text-base">Sort By : {queries && queries.sorting ? queries.sorting : 'latest'}</span>
                                 <IoIosArrowDown />
                             </ButtonDropdown>
                             <NormalDropdown type={{ name: 'link', is: 'sort' }} query="sorting" value={queries && queries.sorting ? queries.sorting : 'latest'} listItem={listDropdownSorting} isOpen={isDropdownSorting} handleClose={() => setIsDropdownSorting(false)} />
                         </div>
                         <div className="relative">
                             <ButtonDropdown handleClick={() => setIsPerPage(!isPerPage)}>
-                                <span className="block text-xs md:text-base">{queries && queries.limit ? queries.limit : 10}</span>
+                                <span className="block text-xs md:text-base">Limit : {queries && queries.limit ? queries.limit : 10}</span>
                                 <IoIosArrowDown />
                             </ButtonDropdown>
                             <NormalDropdown type={{ name: 'link', is: 'sort' }} query="limit" value={queries && queries.limit ? queries.limit : 10} className="px-8" listItem={perPage} isOpen={isPerPage} handleClose={() => setIsPerPage(false)} />
