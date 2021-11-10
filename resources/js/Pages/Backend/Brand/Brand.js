@@ -6,7 +6,7 @@ import Table from '@/Components/Table'
 import Authenticated from '@/Layouts/Authenticated'
 import React, { useState } from 'react'
 import { IoIosArrowDown } from 'react-icons/io';
-import { IoCreateOutline, IoListOutline } from 'react-icons/io5';
+import { IoCloseCircle, IoCreateOutline, IoListOutline } from 'react-icons/io5';
 import { BiSearch } from 'react-icons/bi'
 import ButtonRoundedHover from '@/Components/ButtonRoundedHover'
 import NormalDropdown from '@/Components/Dropdown/NormalDropdown'
@@ -39,7 +39,7 @@ function Brand({ brands, queries = {} }) {
                         <div className="relative">
                             <ButtonDropdown handleClick={() => setIsDropdownSorting(!isDropdownSorting)}>
                                 <span className="hidden md:block text-xs md:text-base">Sort By : {queries && queries.sorting ? queries.sorting : 'latest'}</span>
-                                <span className="block md:hidden"><IoListOutline/></span>
+                                <span className="block md:hidden"><IoListOutline className="h-4 w-4 md:w-6 md:h-6" /></span>
                                 <IoIosArrowDown />
                             </ButtonDropdown>
                             <NormalDropdown type={{ name: 'link', is: 'sort' }} query="sorting" value={queries && queries.sorting ? queries.sorting : 'latest'} listItem={listDropdownSorting} isOpen={isDropdownSorting} handleClose={() => setIsDropdownSorting(false)} />
@@ -47,7 +47,7 @@ function Brand({ brands, queries = {} }) {
                         <div className="relative">
                             <ButtonDropdown handleClick={() => setIsPerPage(!isPerPage)}>
                                 <span className="hidden sm:block text-xs md:text-base">Limit : {queries && queries.limit ? queries.limit : 10}</span>
-                                <span className="block md:hidden"><IoListOutline/></span>
+                                <span className="block md:hidden"><IoListOutline className="h-4 w-4 md:w-6 md:h-6" /></span>
                                 <IoIosArrowDown />
                             </ButtonDropdown>
                             <NormalDropdown type={{ name: 'link', is: 'sort' }} query="limit" value={queries && queries.limit ? queries.limit : 10} className="px-8" listItem={perPage} isOpen={isPerPage} handleClose={() => setIsPerPage(false)} />
@@ -58,7 +58,13 @@ function Brand({ brands, queries = {} }) {
                     </div>
 
                     <ButtonRoundedHover handleClick={() => setIsOpenSearch(!isOpenSearch)} className="block lg:hidden border border-gray-200" bgColor="bg-white hover:bg-gray-100">
-                        <BiSearch className="h-4 w-4 md:w-6 md:h-6 text-gray-600" />
+                        {
+                            isOpenSearch ? (
+                                <IoCloseCircle className="h-4 w-4 md:w-6 md:h-6 text-gray-600" />
+                            ) : (
+                                <BiSearch className="h-4 w-4 md:w-6 md:h-6 text-gray-600" />
+                            )
+                        }
                     </ButtonRoundedHover>
 
                     <SeacrhComponent redirect="brands" query={queries.length === 0 ? {} : queries} value={search} handleChange={handleSearch} placeholder="Search..." className="hidden lg:flex lg:justify-end lg:items-center" width="auto" />

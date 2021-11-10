@@ -6,7 +6,7 @@ import Table from '@/Components/Table'
 import Authenticated from '@/Layouts/Authenticated'
 import React, { useState } from 'react'
 import { IoIosArrowDown } from 'react-icons/io';
-import { IoCreateOutline, IoListOutline } from 'react-icons/io5';
+import { IoCloseCircle, IoCreateOutline, IoListOutline } from 'react-icons/io5';
 import { BiSearch } from 'react-icons/bi'
 import ButtonRoundedHover from '@/Components/ButtonRoundedHover'
 import NormalDropdown from '@/Components/Dropdown/NormalDropdown'
@@ -58,7 +58,13 @@ function Color({ colors, queries = {} }) {
                     </div>
 
                     <ButtonRoundedHover handleClick={() => setIsOpenSearch(!isOpenSearch)} className="block lg:hidden border border-gray-200" bgColor="bg-white hover:bg-gray-100">
-                        <BiSearch className="h-4 w-4 md:w-6 md:h-6 text-gray-600" />
+                        {
+                            isOpenSearch ? (
+                                <IoCloseCircle className="h-4 w-4 md:w-6 md:h-6 text-gray-600" />
+                            ) : (
+                                <BiSearch className="h-4 w-4 md:w-6 md:h-6 text-gray-600" />
+                            )
+                        }
                     </ButtonRoundedHover>
 
                     <SeacrhComponent redirect="colors" query={queries.length === 0 ? {} : queries} value={search} handleChange={handleSearch} placeholder="Search..." className="hidden lg:flex lg:justify-end lg:items-center" width="auto" />
