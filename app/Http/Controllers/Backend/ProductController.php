@@ -13,7 +13,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::with('category')->sorting($request->query('sorting'))->search($request->query('search'))->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
+        $products = Product::with('category')->sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'category_id', 'quantity', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Product/Product', [
             'products' => $products,
             'queries' => $request->query()

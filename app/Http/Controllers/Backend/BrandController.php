@@ -13,7 +13,7 @@ class BrandController extends Controller
 {
     public function index(Request $request)
     {
-        $brands = Brand::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'slug','is_home', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
+        $brands = Brand::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name','is_home', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Brand/Brand', [
             'brands' => $brands,
             'queries' => $request->query()

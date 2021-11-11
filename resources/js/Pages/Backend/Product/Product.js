@@ -16,10 +16,10 @@ import Pagination from '@/Components/Pagination'
 import { listDropdownSorting, perPage } from '@/Config/menu/dashboard/app'
 import { searchTableVariants } from '@/Config/variants/search'
 
-const fieldTable = ['Id', 'Name', 'Slug', 'Status', 'Action'];
+const fieldTable = ['Id', 'Name', 'Category', 'Stock', 'Status', 'Action'];
 
 
-function Color({ products, queries = {} }) {
+function Product({ products, queries = {} }) {
 
     const [isDropdownSorting, setIsDropdownSorting] = useState(false);
     const [isOpenSearch, setIsOpenSearch] = useState(false);
@@ -29,7 +29,6 @@ function Color({ products, queries = {} }) {
     const handleSearch = (e) => {
         setSearch(e.target.value);
     }
-
 
     return (
         <Authenticated headers={['Dashboard', 'Products']} title="Dashboard | Products">
@@ -90,7 +89,8 @@ function Color({ products, queries = {} }) {
                                 <Table.Tr key={data.id} evenHoverClass={evenHoverClass}>
                                     <Table.Td>{index + products.from}</Table.Td>
                                     <Table.Td>{data.name}</Table.Td>
-                                    <Table.Td>{data.slug}</Table.Td>
+                                    <Table.Td>{data.category.name}</Table.Td>
+                                    <Table.Td>{data.quantity}</Table.Td>
                                     <Table.Td>
                                         {
                                             data.status === 'active' ? (
@@ -125,4 +125,4 @@ function Color({ products, queries = {} }) {
     )
 }
 
-export default Color
+export default Product

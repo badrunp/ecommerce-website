@@ -16,7 +16,7 @@ import Pagination from '@/Components/Pagination'
 import { listDropdownSorting, perPage } from '@/Config/menu/dashboard/app'
 import { searchTableVariants } from '@/Config/variants/search'
 
-const fieldTable = ['Id', 'Name', 'Slug', 'Status', 'Action'];
+const fieldTable = ['Id', 'Name', 'Status', 'Action'];
 
 
 function Color({ colors, queries = {} }) {
@@ -90,7 +90,6 @@ function Color({ colors, queries = {} }) {
                                 <Table.Tr key={data.id} evenHoverClass={evenHoverClass}>
                                     <Table.Td>{index + colors.from}</Table.Td>
                                     <Table.Td>{data.name}</Table.Td>
-                                    <Table.Td>{data.slug}</Table.Td>
                                     <Table.Td>
                                         {
                                             data.status === 'active' ? (
