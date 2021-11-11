@@ -1,15 +1,19 @@
 import React from 'react'
-import HamburgerList from './HamburgerList'
+import { IoClose } from 'react-icons/io5'
+import { RiMenu2Fill } from 'react-icons/ri'
 
 function NavbarLeft({ setSidebarOpen, sidebarOpen }) {
     return (
         <div>
             <button className="flex flex-col space-y-2 justify-center w-7 h-7 flex-shrink-0" onClick={() => setSidebarOpen(!sidebarOpen)}>
                 {
-                    ['w-8/12', 'w-full', 'w-10/12'].map((item, index) => (
-                        <HamburgerList width={item} key={index} />
-                    ))
+                    sidebarOpen ? (
+                        <IoClose className="w-7 h-7 text-gray-500" />
+                    ) : (
+                        <RiMenu2Fill className="w-7 h-7 text-gray-500" />
+                    )
                 }
+
             </button>
         </div>
     )

@@ -11,7 +11,7 @@ export default function Button({ type = 'submit', className = '', processing, ch
                 } ` + className
             }
             disabled={processing}
-        >
+>
             {children}
         </button>
     );

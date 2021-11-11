@@ -3,6 +3,7 @@ import { RiProductHuntLine } from 'react-icons/ri';
 import { AiOutlineDashboard, AiOutlineShopping } from 'react-icons/ai';
 import { IoListOutline } from 'react-icons/io5';
 import { BiShowAlt, BiColorFill, BiFontSize } from 'react-icons/bi';
+import {VscProject} from 'react-icons/vsc';
 
 const menuSidebars = [
     {
@@ -28,7 +29,7 @@ const menuSidebars = [
             {
                 id: 1,
                 title: 'Show',
-                link: route('login'),
+                link: route('backend.products.index'),
                 icon: BiShowAlt,
                 mt: true,
             },
@@ -57,7 +58,7 @@ const menuSidebars = [
                 id: 5,
                 title: 'Brands',
                 link: route('backend.brands.index'),
-                icon: IoListOutline,
+                icon: VscProject,
                 mt: true,
             }
         ]

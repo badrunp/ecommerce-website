@@ -13,7 +13,7 @@ import NormalDropdown from '@/Components/Dropdown/NormalDropdown'
 import { AnimatePresence, motion } from 'framer-motion'
 import TableAction from '@/Components/TableAction'
 import Pagination from '@/Components/Pagination'
-import { listDropdownSorting, perPage } from '@/Config/menu/dashboard/category'
+import { listDropdownSorting, perPage } from '@/Config/menu/dashboard/app'
 import { searchTableVariants } from '@/Config/variants/search'
 
 const fieldTable = ['Id', 'Name', 'Slug', 'Status', 'Action'];

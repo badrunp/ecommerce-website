@@ -57,7 +57,7 @@ function TableAction({ data, model = '' }) {
                 <HiDotsHorizontal className="w-6 h-6 text-gray-600" />
             </ButtonRoundedHover>
 
-            <NormalDropdown width="w-44" isOpen={isOpen} clickButton={handleClick} listItem={lists} to="right-0" handleClose={() => setIsOpen(false)} />
+            <NormalDropdown width="w-44" mt="mt-0" isOpen={isOpen} clickButton={handleClick} listItem={lists} to="right-0" handleClose={() => setIsOpen(false)} />
 
             <ModalComponent open={openModal}>
                 <div className="py-6 w-full text-center flex flex-col items-center space-y-4">

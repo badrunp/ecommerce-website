@@ -61,7 +61,7 @@ const openSidebarVariants = {
         width: 240,
         zIndex: 100,
         transition: {
-            type: 'tween'
+            type: 'tween',
         }
     },
     close: {

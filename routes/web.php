@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ColorController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SizeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,21 @@ Route::prefix('dashboard')->middleware(['auth'])->name('backend.')->group(functi
     Route::post('/dashboard/products/brands/{brand}/status', [BrandController::class, 'updateStatus'])->name('brands.updateStatus');
     Route::resource('/products/brands', BrandController::class)->scoped([
         'brand' => 'slug'
+    ]);
+
+    // Products
+    Route::get('/dashboard/products/show/search', [ProductController::class, 'search'])->name('products.search');
+    Route::post('/dashboard/products/show/{product}/update', [ProductController::class, 'productUpdate'])->name('products.productUpdate');
+    Route::post('/dashboard/products/show/{product}/status', [ProductController::class, 'updateStatus'])->name('products.updateStatus');
+    Route::resource('/products/show', ProductController::class)->scoped([
+        'product' => 'slug'
+    ])->parameters([
+        'show' => 'product'
+    ])->names([
+        'create' => 'products.create',
+        'index' => 'products.index',
+        'edit' => 'products.edit',
+        'destroy' => 'products.destroy'
     ]);
 });
 

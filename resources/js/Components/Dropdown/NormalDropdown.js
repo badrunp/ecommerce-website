@@ -3,7 +3,7 @@ import { Link, usePage } from '@inertiajs/inertia-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef } from 'react'
 
-function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', width = "max-content", className = '', clickButton, type = {name: 'button', is: 'button'}, value = 5, query = '' }) {
+function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', width = "max-content", className = '', clickButton, mt = 'mt-11 md:mt-14', type = {name: 'button', is: 'button'}, value = 5, query = '' }) {
     const ref = useRef();
     const {url} = usePage()
     const path = url.indexOf(`?${query}=${value}`) != -1 ? url.replace(`?${query}=${value}`, '?') : url.indexOf(`&${query}=${value}`) !== -1 ? url.replace(`&${query}=${value}`, '') : url
@@ -26,7 +26,7 @@ function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', w
         <React.Fragment>
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div variants={dropdownVariants} initial="hidden" animate="visible" exit="hidden" className={`absolute top-0 mt-11 md:mt-14 z-10 ${to}`} ref={ref}>
+                    <motion.div variants={dropdownVariants} initial="hidden" animate="visible" exit="hidden" className={`absolute top-0 ${mt} z-10 ${to}`} ref={ref}>
                         <div className={`bg-white shadow rounded py-1 overflow-hidden border border-gray-200 border-opacity-50 divide-y-2 divide-opacity-40 divide-gray-200 ${width}`}>
                             {
                                 listItem.map((item, index) => {
@@ -38,10 +38,10 @@ function NormalDropdown({ listItem, isOpen = true, handleClose, to = 'left-0', w
                                             href = '/';
                                         }
                                     }
-                                    const checkHandleClick = item.button && clickButton ? clickButton : undefined
+                                    const checkHandleClick = item.button && clickButton ? clickButton : false
                                     return (
                                         type.name === 'button' ? (
-                                            <button onClick={(e) => checkHandleClick(e, item.type)} key={index} className={`block py-2 w-full px-5 truncate text-gray-600 text-sm md:text-base text-left hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out ${className}`}>{item.title}</button>
+                                            <button onClick={(e) => checkHandleClick && checkHandleClick(e, item.type)} key={index} className={`block py-2 w-full px-5 truncate text-gray-600 text-sm md:text-base text-left hover:bg-gray-100 cursor-pointer transition duration-150 ease-in-out ${className}`}>{item.title}</button>
                                         ) : (
                                             <Link key={index} href={href} className={`block py-2 px-5 truncate text-sm md:text-base cursor-pointer transition duration-150 ease-in-out ${type.is === 'sort' ? value == item.sort ? 'bg-blue-500 text-white hover:bg-blue-600' : 'hover:bg-gray-100 text-gray-600' : 'hover:bg-gray-100 text-gray-600'} ${className}`}>{item.title}</Link>
                                         )

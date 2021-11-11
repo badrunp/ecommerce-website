@@ -13,7 +13,7 @@ import NormalDropdown from '@/Components/Dropdown/NormalDropdown'
 import { AnimatePresence, motion } from 'framer-motion'
 import TableAction from '@/Components/TableAction'
 import Pagination from '@/Components/Pagination'
-import { listDropdownSorting, perPage } from '@/Config/menu/dashboard/category'
+import { listDropdownSorting, perPage } from '@/Config/menu/dashboard/app'
 import { searchTableVariants } from '@/Config/variants/search'
 
 const fieldTable = ['Id', 'Name', 'Slug', 'Status', 'Action'];
@@ -81,7 +81,7 @@ function Color({ colors, queries = {} }) {
                     )
                 }
             </AnimatePresence>
-            <div className="bg-white relative w-full overflow-x-auto shadow rounded px-4 md:px-8 py-6 md:py-8">
+            <div className="bg-white relative w-full overflow-x-auto overflow-y-hidden shadow rounded px-4 md:px-8 py-6 md:py-8">
                 <Table columns={fieldTable} >
                     {
                         colors && colors.data.length > 0 ? colors.data.map((data, index) => {
