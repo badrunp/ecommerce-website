@@ -6,7 +6,7 @@ import Input from '@/Components/Input';
 import Label from '@/Components/Label';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import ErrorMessage from '@/Components/ErrorMessage';
-import { motion, useAnimation } from 'framer-motion';
+import { useAnimation } from 'framer-motion';
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
