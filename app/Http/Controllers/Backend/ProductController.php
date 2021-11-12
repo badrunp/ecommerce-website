@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Category;
+use App\Models\Backend\Color;
 use App\Models\Backend\Product;
+use App\Models\Backend\Size;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
@@ -13,7 +15,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::with('category')->sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'category_id', 'quantity', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
+        $products = Product::with('category')->sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'slug', 'category_id', 'quantity', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Product/Product', [
             'products' => $products,
             'queries' => $request->query()
@@ -22,7 +24,9 @@ class ProductController extends Controller
     public function create()
     {
         return Inertia::render('Backend/Product/Create', [
-            'categories' => Category::where('status', 'active')->get()
+            'categories' => Category::where('status', 'active')->get(),
+            'colors' => Color::where('status', 'active')->get(),
+            'sizes' => Size::where('status', 'active')->get()
         ]);
     }
 

@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $category = Category::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name','is_home', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
+        $category = Category::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'slug','is_home', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Category/Category', [
             'categories' => $category,
             'queries' => $request->query()

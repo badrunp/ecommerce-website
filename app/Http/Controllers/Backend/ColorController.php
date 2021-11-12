@@ -13,7 +13,7 @@ class ColorController extends Controller
     
     public function index(Request $request)
     {
-        $colors = Color::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
+        $colors = Color::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'slug', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Color/Color', [
             'colors' => $colors,
             'queries' => $request->query()
