@@ -40,7 +40,7 @@ export default function Input({
                 value={value}
                 {...props}
                 className={
-                    `focus:ring ${classError} focus:ring-opacity-50 rounded-md md:rounded-lg shadow-sm transition duration-150 ease-in-out ` +
+                    `focus:ring ${classError} focus:ring-opacity-50 rounded-md shadow-sm transition duration-150 ease-in-out ` +
                     className
                 }
                 ref={input}

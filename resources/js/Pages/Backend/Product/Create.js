@@ -9,6 +9,20 @@ import Authenticated from '@/Layouts/Authenticated'
 import { useForm } from '@inertiajs/inertia-react'
 import React from 'react'
 import { IoCreateOutline } from 'react-icons/io5'
+import Select from 'react-select';
+
+const colourOptions = [
+    { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
+    { value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true },
+    { value: 'purple', label: 'Purple', color: '#5243AA' },
+    { value: 'red', label: 'Red', color: '#FF5630', isFixed: true },
+    { value: 'orange', label: 'Orange', color: '#FF8B00' },
+    { value: 'yellow', label: 'Yellow', color: '#FFC400' },
+    { value: 'green', label: 'Green', color: '#36B37E' },
+    { value: 'forest', label: 'Forest', color: '#00875A' },
+    { value: 'slate', label: 'Slate', color: '#253858' },
+    { value: 'silver', label: 'Silver', color: '#666666' },
+  ];
 
 function Create({ categories }) {
 
@@ -19,12 +33,14 @@ function Create({ categories }) {
         quantity: '',
         description: '',
         sumary: '',
-        category_id: ''
+        category_id: '',
+        sizes: []
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('backend.show.store'));
+        console.log(data);
+        // post(route('backend.show.store'));
     }
 
     const headers = [
@@ -92,7 +108,7 @@ function Create({ categories }) {
                         </div>
                         <div className="py-4">
 
-                            <div>   
+                            <div>
                                 <Label forInput="category_id" value="Category" />
 
                                 <SelectInput value={data.category_id} items={categories} className="mt-2 block w-full" id="category_id" handleChange={(e) => setData('category_id', e.target.value)} />
@@ -100,6 +116,20 @@ function Create({ categories }) {
                                 {errors.category_id && (
                                     <ErrorMessage error={errors.category_id} />
                                 )}
+                            </div>
+
+                            <div className="mt-6">
+                                <Label forInput="sizes" value="Sizes" className="mb-2" />
+
+                                <Select
+                                    defaultValue={data.sizes}
+                                    onChange={(data) => setData('sizes', data.map(d => d.value))}
+                                    isMulti
+                                    name="sizes"
+                                    options={colourOptions}
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
+                                />
                             </div>
 
                             <div className="mt-6">
