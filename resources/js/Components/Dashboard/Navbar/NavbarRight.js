@@ -10,7 +10,7 @@ import { menuUserNavbarDropdown } from '@/Config/menu/dashboard/navbar'
 import { AuthContext } from '@/app'
 
 
-function NavbarRight(props) {
+function NavbarRight() {
     const [userDropdownOpen, setUserDropdownOpen] = useState(false);
     const [userNotifOpen, setNotifDropdownOpen] = useState(false);
     const refUserDropdown = useRef(null);

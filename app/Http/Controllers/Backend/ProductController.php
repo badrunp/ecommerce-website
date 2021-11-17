@@ -23,10 +23,18 @@ class ProductController extends Controller
     }
     public function create()
     {
+
+        $sizes = collect(Size::where('status', 'active')->get())->map(function($size){
+            return [
+                'value' => $size->id,
+                'label' => $size->name
+            ];
+        });
+
         return Inertia::render('Backend/Product/Create', [
             'categories' => Category::where('status', 'active')->get(),
             'colors' => Color::where('status', 'active')->get(),
-            'sizes' => Size::where('status', 'active')->get()
+            'sizes' => $sizes
         ]);
     }
 

@@ -32,7 +32,7 @@ class SizeController extends Controller
         $slug = Str::slug($request->name);
 
         Size::create([
-            'name' => strtoupper($request->name),
+            'name' => ucfirst($request->name),
             'slug' => $slug,
         ]);
         
@@ -61,7 +61,7 @@ class SizeController extends Controller
 
         $slug = Str::slug($request->name);
         $size->update([
-            'name' => strtoupper($request->name),
+            'name' => ucfirst($request->name),
             'slug' => $slug,
         ]);
 
