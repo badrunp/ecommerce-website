@@ -48,11 +48,12 @@ class ProductController extends Controller
             'description' => 'required',
             'sumary' => 'nullable',
             'category_id' => 'required',
+            'sizes' => 'required'
         ]);
 
         $slug = Str::slug($request->name);
 
-        Product::create([
+        $product = Product::create([
             'name' => $request->name,
             'slug' => $slug,
             'regular_price' => $request->regular_price,
@@ -62,6 +63,8 @@ class ProductController extends Controller
             'sumary' => $request->sumary,
             'category_id' => $request->category_id,
         ]);
+
+        $product->sizes()->sync($request->sizes);
 
         return redirect()->route('backend.products.index');
     }

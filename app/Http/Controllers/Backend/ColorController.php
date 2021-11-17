@@ -13,7 +13,7 @@ class ColorController extends Controller
     
     public function index(Request $request)
     {
-        $colors = Color::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'slug', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
+        $colors = Color::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'slug', 'code', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Color/Color', [
             'colors' => $colors,
             'queries' => $request->query()
@@ -28,13 +28,15 @@ class ColorController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:colors,name',
+            'code' => 'required'
         ]);
 
         $slug = Str::slug($request->name);
 
         Color::create([
-            'name' => $request->name,
+            'name' => ucfirst($request->name),
             'slug' => $slug,
+            'code' => strtolower($request->code)
         ]);
         
         return redirect()->route('backend.colors.index');
@@ -58,12 +60,14 @@ class ColorController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:colors,name,' . $color->id,
+            'code' => 'required'
         ]);
 
         $slug = Str::slug($request->name);
         $color->update([
-            'name' => $request->name,
+            'name' => ucfirst($request->name),
             'slug' => $slug,
+            'code' =>  strtolower($request->code)
         ]);
 
         return redirect()->route('backend.colors.index');

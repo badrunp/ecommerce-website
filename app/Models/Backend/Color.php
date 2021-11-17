@@ -10,5 +10,5 @@ class Color extends Model
 {
     use HasFactory, QueryDatabaseTrait;
 
-    protected $fillable = ['name', 'slug', 'status'];
+    protected $fillable = ['name', 'slug', 'code', 'status'];
 }

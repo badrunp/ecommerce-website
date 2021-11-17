@@ -27,7 +27,7 @@ function Create({ categories, sizes }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(data);
-        // post(route('backend.show.store'));
+        post(route('backend.show.store'));
     }
 
     const headers = [
@@ -117,6 +117,9 @@ function Create({ categories, sizes }) {
                                     className="basic-multi-select"
                                     classNamePrefix="select"
                                 />
+                                {errors.sizes && (
+                                    <ErrorMessage error={errors.sizes} />
+                                )}
                             </div>
 
                             <div className="mt-6">

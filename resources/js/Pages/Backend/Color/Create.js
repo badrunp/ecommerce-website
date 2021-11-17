@@ -12,6 +12,7 @@ function Create() {
 
     const { data, setData, post, errors } = useForm({
         name: '',
+        code: ''
     })
 
     const handleSubmit = (e) => {
@@ -47,6 +48,16 @@ function Create() {
 
                             {errors.slug && (
                                 <ErrorMessage error={errors.slug} /> 
+                            )}
+                        </div>
+
+                        <div className="mt-6">
+                            <Label forInput="code" value="Code" />
+
+                            <Input type="text" value={data.code} className="mt-2 block w-full" handleChange={(e) => setData('code', e.target.value)} />
+
+                            {errors.code && (
+                                <ErrorMessage error={errors.code} />
                             )}
                         </div>
                         
