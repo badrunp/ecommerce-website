@@ -76,9 +76,17 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        $sizes = collect(Size::where('status', 'active')->get())->map(function($size){
+            return [
+                'value' => $size->id,
+                'label' => $size->name
+            ];
+        });
+
         return Inertia::render('Backend/Product/Edit', [
-            'product' => $product,
-            'categories' => Category::where('status', 'active')->get()
+            'product' => $product->load('sizes'),
+            'categories' => Category::where('status', 'active')->get(),
+            'sizes' => $sizes
         ]);
     }
 
@@ -88,6 +96,7 @@ class ProductController extends Controller
 
     public function productUpdate(Request $request, Product $product)
     {
+  
         $request->validate([
             'name' => 'required|unique:products,name,' . $product->id,
             'regular_price' => 'required',
@@ -96,6 +105,7 @@ class ProductController extends Controller
             'description' => 'required',
             'sumary' => 'nullable',
             'category_id' => 'required',
+            'sizes' => 'required'
         ]);
 
         $slug = Str::slug($request->name);
@@ -109,6 +119,8 @@ class ProductController extends Controller
             'sumary' => $request->sumary,
             'category_id' => $request->category_id,
         ]);
+
+        $product->sizes()->sync(collect($request->sizes)->pluck('value'));
 
         return redirect()->route('backend.products.index');
     }

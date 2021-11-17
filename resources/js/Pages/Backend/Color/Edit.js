@@ -5,10 +5,14 @@ import Input from '@/Components/Input'
 import Label from '@/Components/Label'
 import Authenticated from '@/Layouts/Authenticated'
 import { useForm } from '@inertiajs/inertia-react'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { SketchPicker } from 'react-color'
 import { IoCreateOutline } from 'react-icons/io5'
 
 function Edit({color}) {
+
+    const [showColor, setShowColor] = useState(false);
+    const colorRef = useRef(null);
     const { data, setData, post, errors } = useForm({
         name: color.name,
         code: color.code
@@ -26,6 +30,22 @@ function Edit({color}) {
         <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />
         
     ]
+
+    useEffect(() => {
+        window.addEventListener('click', handleCloseColor);
+
+        return () => {
+            window.removeEventListener('click', handleCloseColor)
+        }
+    })
+
+    const handleCloseColor = (e) => {
+
+        if(showColor && !colorRef.current.contains(e.target)){
+            setShowColor(false);
+        }
+
+    }
 
     return (
         <Authenticated headers={headers} title="Dashboard | Edit Color">
@@ -52,14 +72,24 @@ function Edit({color}) {
                             )}
                         </div>
 
-                        <div className="mt-6">
+                        <div className="mt-6 relative" ref={colorRef} onClick={() => setShowColor(true)}>
                             <Label forInput="code" value="Code" />
 
-                            <Input type="text" value={data.code} className="mt-2 block w-full" handleChange={(e) => setData('code', e.target.value)} />
+                            <Input type="text" value={data.code} className="mt-2 block w-full" handleChange={(e) => setData('code', e.target.value)} readOnly />
 
                             {errors.code && (
                                 <ErrorMessage error={errors.code} />
                             )}
+
+                            {
+                                showColor && (
+                                    <SketchPicker
+                                        color={data.code}
+                                        onChangeComplete={(color) => setData('code', color.hex)}
+                                        className="absolute right-0 bottom-0"
+                                    />
+                                )
+                            }
                         </div>
 
                         <div className="mt-6">

@@ -5,18 +5,22 @@ import Input from '@/Components/Input'
 import Label from '@/Components/Label'
 import Authenticated from '@/Layouts/Authenticated'
 import { useForm } from '@inertiajs/inertia-react'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { IoCreateOutline } from 'react-icons/io5'
+import { SketchPicker } from 'react-color';
+
 
 function Create() {
 
+    const [showColor, setShowColor] = useState(false);
+    const colorRef = useRef(null);
     const { data, setData, post, errors } = useForm({
         name: '',
-        code: ''
+        code: '#000'
     })
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
         post(route('backend.colors.store'));
     }
 
@@ -25,6 +29,22 @@ function Create() {
         'Colors',
         <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />
     ]
+
+    useEffect(() => {
+        window.addEventListener('click', handleCloseColor);
+
+        return () => {
+            window.removeEventListener('click', handleCloseColor)
+        }
+    })
+
+    const handleCloseColor = (e) => {
+
+        if(showColor && !colorRef.current.contains(e.target)){
+            setShowColor(false);
+        }
+
+    }
 
     return (
         <Authenticated headers={headers} title="Dashboard | Create Colors">
@@ -51,15 +71,26 @@ function Create() {
                             )}
                         </div>
 
-                        <div className="mt-6">
+                        <div className="mt-6 relative" ref={colorRef} onClick={() => setShowColor(true)}>
                             <Label forInput="code" value="Code" />
 
-                            <Input type="text" value={data.code} className="mt-2 block w-full" handleChange={(e) => setData('code', e.target.value)} />
+                            <Input type="text" value={data.code} className="mt-2 block w-full" handleChange={(e) => setData('code', e.target.value)} readOnly />
 
                             {errors.code && (
                                 <ErrorMessage error={errors.code} />
                             )}
+
+                            {
+                                showColor && (
+                                    <SketchPicker
+                                        color={data.code}
+                                        onChangeComplete={(color) => setData('code', color.hex)}
+                                        className="absolute right-0 bottom-0"
+                                    />
+                                )
+                            }
                         </div>
+
                         
                         <div className="mt-6">
                             <Button className="bg-gradient-to-br from-blue-500 to-blue-600 focus:ring-2 focus:ring-blue-300">Create</Button>

@@ -28,6 +28,7 @@
     },
     "dependencies": {
         "framer-motion": "^4.1.17",
+        "react-color": "^2.19.3",
         "react-icons": "^4.2.0",
         "react-select": "^5.2.1"
     }

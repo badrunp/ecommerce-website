@@ -9,8 +9,9 @@ import Authenticated from '@/Layouts/Authenticated'
 import { useForm } from '@inertiajs/inertia-react'
 import React from 'react'
 import { IoCreateOutline } from 'react-icons/io5'
+import Select from 'react-select';
 
-function Edit({ product, categories }) {
+function Edit({ product, categories, sizes }) {
     const { data, setData, post, errors } = useForm({
         name: product.name,
         regular_price: product.regular_price,
@@ -18,9 +19,9 @@ function Edit({ product, categories }) {
         quantity: product.quantity,
         description: product.description,
         sumary: product.sumary ? product.sumary : '',
-        category_id: product.category_id
+        category_id: product.category_id,
+        sizes: product.sizes && product.sizes.map(size => ({ value: size.id, label: size.name }))
     })
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -101,6 +102,23 @@ function Edit({ product, categories }) {
 
                                     {errors.category_id && (
                                         <ErrorMessage error={errors.category_id} />
+                                    )}
+                                </div>
+
+                                <div className="mt-6">
+                                    <Label forInput="sizes" value="Sizes" className="mb-2" />
+
+                                    <Select
+                                        defaultValue={data.sizes}
+                                        onChange={(data) => setData('sizes', data)}
+                                        isMulti
+                                        name="sizes"
+                                        options={sizes && sizes}
+                                        className="basic-multi-select"
+                                        classNamePrefix="select"
+                                    />
+                                    {errors.sizes && (
+                                        <ErrorMessage error={errors.sizes} />
                                     )}
                                 </div>
 
