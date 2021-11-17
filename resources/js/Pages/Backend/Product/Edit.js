@@ -5,13 +5,14 @@ import Input from '@/Components/Input'
 import Label from '@/Components/Label'
 import SelectInput from '@/Components/SelectInput'
 import Textarea from '@/Components/Textarea'
+import { colourStyles } from '@/Config/react_select/config'
 import Authenticated from '@/Layouts/Authenticated'
 import { useForm } from '@inertiajs/inertia-react'
 import React from 'react'
 import { IoCreateOutline } from 'react-icons/io5'
 import Select from 'react-select';
 
-function Edit({ product, categories, sizes }) {
+function Edit({ product, categories, sizes, colors }) {
     const { data, setData, post, errors } = useForm({
         name: product.name,
         regular_price: product.regular_price,
@@ -20,7 +21,8 @@ function Edit({ product, categories, sizes }) {
         description: product.description,
         sumary: product.sumary ? product.sumary : '',
         category_id: product.category_id,
-        sizes: product.sizes && product.sizes.map(size => ({ value: size.id, label: size.name }))
+        sizes: product.sizes && product.sizes.map(size => ({ value: size.id, label: size.name })),
+        colors: product.colors && product.colors.map(color => ({ value: color.id, label: color.name, color: color.code }))
     })
 
     const handleSubmit = (e) => {
@@ -119,6 +121,24 @@ function Edit({ product, categories, sizes }) {
                                     />
                                     {errors.sizes && (
                                         <ErrorMessage error={errors.sizes} />
+                                    )}
+                                </div>
+
+                                <div className="mt-6">
+                                    <Label forInput="colors" value="Colors" className="mb-2" />
+
+                                    <Select
+                                        defaultValue={data.colors}
+                                        onChange={(data) => setData('colors', data)}
+                                        isMulti
+                                        name="colors"
+                                        options={colors && colors}
+                                        className="basic-multi-select"
+                                        classNamePrefix="select"
+                                        styles={colourStyles}
+                                    />
+                                    {errors.colors && (
+                                        <ErrorMessage error={errors.colors} />
                                     )}
                                 </div>
 

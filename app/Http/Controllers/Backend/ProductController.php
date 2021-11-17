@@ -31,10 +31,18 @@ class ProductController extends Controller
             ];
         });
 
+        $colors = collect(Color::where('status', 'active')->get())->map(function($color){
+            return [
+                'value' => $color->id,
+                'label' => $color->name,
+                'color' => $color->code
+            ];
+        });
+
         return Inertia::render('Backend/Product/Create', [
             'categories' => Category::where('status', 'active')->get(),
-            'colors' => Color::where('status', 'active')->get(),
-            'sizes' => $sizes
+            'colors' => $colors,
+            'sizes' => $sizes,
         ]);
     }
 
@@ -48,7 +56,8 @@ class ProductController extends Controller
             'description' => 'required',
             'sumary' => 'nullable',
             'category_id' => 'required',
-            'sizes' => 'required'
+            'sizes' => 'required',
+            'colors' => 'required'
         ]);
 
         $slug = Str::slug($request->name);
@@ -65,6 +74,7 @@ class ProductController extends Controller
         ]);
 
         $product->sizes()->sync($request->sizes);
+        $product->colors()->sync($request->colors);
 
         return redirect()->route('backend.products.index');
     }
@@ -83,10 +93,19 @@ class ProductController extends Controller
             ];
         });
 
+        $colors = collect(Color::where('status', 'active')->get())->map(function($color){
+            return [
+                'value' => $color->id,
+                'label' => $color->name,
+                'color' => $color->code
+            ];
+        });
+
         return Inertia::render('Backend/Product/Edit', [
-            'product' => $product->load('sizes'),
+            'product' => $product->load(['sizes', 'colors']),
             'categories' => Category::where('status', 'active')->get(),
-            'sizes' => $sizes
+            'sizes' => $sizes,
+            'colors' => $colors
         ]);
     }
 
@@ -105,7 +124,8 @@ class ProductController extends Controller
             'description' => 'required',
             'sumary' => 'nullable',
             'category_id' => 'required',
-            'sizes' => 'required'
+            'sizes' => 'required',
+            'colors' => 'required'
         ]);
 
         $slug = Str::slug($request->name);
@@ -121,6 +141,7 @@ class ProductController extends Controller
         ]);
 
         $product->sizes()->sync(collect($request->sizes)->pluck('value'));
+        $product->colors()->sync(collect($request->colors)->pluck('value'));
 
         return redirect()->route('backend.products.index');
     }

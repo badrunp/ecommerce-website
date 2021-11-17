@@ -5,13 +5,14 @@ import Input from '@/Components/Input'
 import Label from '@/Components/Label'
 import SelectInput from '@/Components/SelectInput'
 import Textarea from '@/Components/Textarea'
+import { colourStyles } from '@/Config/react_select/config'
 import Authenticated from '@/Layouts/Authenticated'
 import { useForm } from '@inertiajs/inertia-react'
 import React from 'react'
 import { IoCreateOutline } from 'react-icons/io5'
 import Select from 'react-select';
 
-function Create({ categories, sizes }) {
+function Create({ categories, sizes, colors }) {
 
     const { data, setData, post, errors } = useForm({
         name: '',
@@ -21,12 +22,12 @@ function Create({ categories, sizes }) {
         description: '',
         sumary: '',
         category_id: '',
-        sizes: []
+        sizes: [],
+        colors: []
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data);
         post(route('backend.show.store'));
     }
 
@@ -119,6 +120,24 @@ function Create({ categories, sizes }) {
                                 />
                                 {errors.sizes && (
                                     <ErrorMessage error={errors.sizes} />
+                                )}
+                            </div>
+
+                            <div className="mt-6">
+                                <Label forInput="colors" value="Colors" className="mb-2" />
+
+                                <Select
+                                    defaultValue={data.colors}
+                                    onChange={(data) => setData('colors', data.map(d => d.value))}
+                                    isMulti
+                                    name="colors"
+                                    options={colors && colors}
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
+                                    styles={colourStyles}
+                                />
+                                {errors.colors && (
+                                    <ErrorMessage error={errors.colors} />
                                 )}
                             </div>
 
