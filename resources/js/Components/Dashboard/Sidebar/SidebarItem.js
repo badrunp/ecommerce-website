@@ -20,7 +20,7 @@ function SidebarItem({ menu, index, handleClickOpenItems, openItemSidebar }) {
 
             {
                 menu.children && (
-                    <motion.span variants={arrowVariants} initial={false} animate={openItemSidebar[index] ? 'up' : 'down'} className="flex-shrink">
+                    <motion.span variants={arrowVariants} custom={.2} initial={false} animate={openItemSidebar[index] ? 'up' : 'down'} className="flex-shrink">
                         <IoIosArrowDown className={`w-4 h-4 ${url.startsWith(`/dashboard/${menu.title.toLowerCase()}`) ? 'text-black' : 'text-white'}`} />
                     </motion.span>
                 )

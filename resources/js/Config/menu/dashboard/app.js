@@ -20,7 +20,7 @@ const perPage = [
     },
     {
         title: 15,
-        sort: 20,
+        sort: 15,
     },
     {
         title: 20,

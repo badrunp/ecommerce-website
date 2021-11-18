@@ -45,15 +45,20 @@ const menuSidebarVariants = {
 }
 
 const arrowVariants = {
-    down: {
+    down: i => ({
         rotate: 0,
         transition: {
-            delay: .2
+            delay: i,
+            type: 'tween'
         }
-    },
-    up: {
-        rotate: 180
-    }
+    }),
+    up: i => ({
+        rotate: 180,
+        transition: {
+            delay: i,
+            type: 'tween'
+        }
+    })
 }
 
 const openSidebarVariants = {

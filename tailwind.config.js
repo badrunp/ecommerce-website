@@ -17,6 +17,9 @@ module.exports = {
             colors: {
                 cyan: colors.cyan,
                 sky: colors.sky
+            },
+            spacing: {
+                '1008': '9px'
             }
         },
     },
