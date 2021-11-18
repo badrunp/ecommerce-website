@@ -7,6 +7,7 @@ import Label from '@/Components/Label';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import ErrorMessage from '@/Components/ErrorMessage';
 import { useAnimation } from 'framer-motion';
+import Resize from '@/Hooks/Resize';
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -14,6 +15,8 @@ export default function Login({ status, canResetPassword }) {
         password: '',
         remember: '',
     });
+
+    const { width } = Resize();
 
     const inputEmail = useAnimation();
     const inputPassword = useAnimation();
@@ -35,12 +38,14 @@ export default function Login({ status, canResetPassword }) {
         post(route('login',), {
             preserveScroll: true,
             onError: (error) => {
-                if (error.email) {
-                    inputEmail.start({ x: [50,-50,50,-50, 50, 0] })
-                }
-                
-                if(error.password){
-                    inputPassword.start({ x: [50,-50,50,-50, 50, 0] })
+                if (width > 599) {
+                    if (error.email) {
+                        inputEmail.start({ x: [50, -50, 50, -50, 50, 0] })
+                    }
+
+                    if (error.password) {
+                        inputPassword.start({ x: [50, -50, 50, -50, 50, 0] })
+                    }
                 }
             }
         });
@@ -71,7 +76,7 @@ export default function Login({ status, canResetPassword }) {
                         handleChange={onHandleChange}
                         layout="guest"
                         animate={inputEmail}
-                        transition={{type: 'spring', duration: .5}}
+                        transition={{ type: 'spring', duration: .5 }}
                     />
 
                     {errors.email && (
@@ -92,7 +97,7 @@ export default function Login({ status, canResetPassword }) {
                         handleChange={onHandleChange}
                         layout="guest"
                         animate={inputPassword}
-                        transition={{type: 'spring', duration: .5}}
+                        transition={{ type: 'spring', duration: .5 }}
                     />
 
                     {errors.password && (

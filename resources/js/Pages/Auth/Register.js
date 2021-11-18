@@ -7,6 +7,7 @@ import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import Checkbox from '@/Components/Checkbox';
 import ErrorMessage from '@/Components/ErrorMessage';
 import { useAnimation } from 'framer-motion';
+import Resize from '@/Hooks/Resize';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -15,6 +16,8 @@ export default function Register() {
         password: '',
         password_confirmation: '',
     });
+
+    const { width } = Resize();
 
     const inputName = useAnimation();
     const inputEmail = useAnimation();
@@ -37,16 +40,18 @@ export default function Register() {
             preserveScroll: true,
             onError: (error) => {
 
-                if (error.name) {
-                    inputName.start({ x: [50,-50,50,-50, 50, 0] })
-                }
+                if (width > 599) {
+                    if (error.name) {
+                        inputName.start({ x: [50, -50, 50, -50, 50, 0] })
+                    }
 
-                if (error.email) {
-                    inputEmail.start({ x: [50,-50,50,-50, 50, 0] })
-                }
-                
-                if(error.password){
-                    inputPassword.start({ x: [50,-50,50,-50, 50, 0] })
+                    if (error.email) {
+                        inputEmail.start({ x: [50, -50, 50, -50, 50, 0] })
+                    }
+
+                    if (error.password) {
+                        inputPassword.start({ x: [50, -50, 50, -50, 50, 0] })
+                    }
                 }
             }
         });
@@ -74,7 +79,7 @@ export default function Register() {
                         isError={errors.name}
                         layout="guest"
                         animate={inputName}
-                        transition={{type: 'spring', duration: .5}}
+                        transition={{ type: 'spring', duration: .5 }}
                     />
 
                     {errors.name && (
@@ -95,7 +100,7 @@ export default function Register() {
                         isError={errors.email}
                         layout="guest"
                         animate={inputEmail}
-                        transition={{type: 'spring', duration: .5}}
+                        transition={{ type: 'spring', duration: .5 }}
                     />
 
                     {errors.email && (
@@ -116,7 +121,7 @@ export default function Register() {
                         isError={errors.password}
                         layout="guest"
                         animate={inputPassword}
-                        transition={{type: 'spring', duration: .5}}
+                        transition={{ type: 'spring', duration: .5 }}
                     />
 
                     {errors.password && (
