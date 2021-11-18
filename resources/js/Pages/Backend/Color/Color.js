@@ -57,6 +57,7 @@ function Color({ colors, queries = {} }) {
                         setIsOpenSearch={setIsOpenSearch}
                         search={search}
                         handleSearch={handleSearch}
+                        redirect="colors"
                     />
                 </div>
             </ContainerComponent>
@@ -66,6 +67,7 @@ function Color({ colors, queries = {} }) {
                 isOpenSearch={isOpenSearch}
                 search={search}
                 handleSearch={handleSearch}
+                redirect="colors"
             />
 
             <div className="bg-white relative w-full overflow-x-auto overflow-y-hidden shadow rounded px-4 md:px-8 py-6 md:py-8">

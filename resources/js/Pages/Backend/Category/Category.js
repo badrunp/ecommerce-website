@@ -57,6 +57,7 @@ function Category({ categories, queries = {} }) {
                         setIsOpenSearch={setIsOpenSearch}
                         search={search}
                         handleSearch={handleSearch}
+                        redirect="categories"
                     />
                 </div>
             </ContainerComponent>
@@ -66,6 +67,7 @@ function Category({ categories, queries = {} }) {
                 isOpenSearch={isOpenSearch}
                 search={search}
                 handleSearch={handleSearch}
+                redirect="categories"
             />
 
             <div className="bg-white relative w-full overflow-x-auto shadow rounded px-4 md:px-8 py-6 md:py-8">

@@ -1,7 +1,7 @@
 const dropdownVariants = {
     hidden: {
         opacity: 0,
-        y: 150,
+        y: 120,
         transition: {
             duration: .2,
             type: 'spring',

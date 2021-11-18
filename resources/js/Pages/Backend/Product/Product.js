@@ -11,6 +11,7 @@ import SortBy from '@/Components/Dashboard/table_header/SortBy'
 import LimitPage from '@/Components/Dashboard/table_header/LimitPage'
 import SearchLg from '@/Components/Dashboard/table_header/SearchLg'
 import SearchSm from '@/Components/Dashboard/table_header/SearchSm'
+import { usePage } from '@inertiajs/inertia-react'
 
 const fieldTable = ['Id', 'Name', 'Category', 'Stock', 'Status', 'Action'];
 
@@ -21,6 +22,8 @@ function Product({ products, queries = {} }) {
     const [isPerPage, setIsPerPage] = useState(false);
     const [search, setSearch] = useState(queries && queries.search ? queries.search : '');
 
+    const { session: { message } } = usePage().props;
+
     const handleSearch = (e) => {
         setSearch(e.target.value);
     }
@@ -30,7 +33,7 @@ function Product({ products, queries = {} }) {
             <ContainerComponent className="mb-3">
                 <div className="flex flex-row items-center justify-between space-x-5 md:space-x-8">
                     <div className="flex flex-row items-center space-x-2 md:space-x-4">
-                        <SortBy 
+                        <SortBy
                             queries={queries}
                             isDropdownSorting={isDropdownSorting}
                             setIsDropdownSorting={setIsDropdownSorting}
@@ -55,15 +58,17 @@ function Product({ products, queries = {} }) {
                         setIsOpenSearch={setIsOpenSearch}
                         search={search}
                         handleSearch={handleSearch}
+                        redirect="products"
                     />
                 </div>
             </ContainerComponent>
-                        
+
             <SearchSm
                 queries={queries}
                 isOpenSearch={isOpenSearch}
                 search={search}
                 handleSearch={handleSearch}
+                redirect="products"
             />
 
             <div className="bg-white relative w-full overflow-x-auto overflow-y-hidden shadow rounded px-4 md:px-8 py-6 md:py-8">
