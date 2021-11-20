@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BrandRequest;
 use App\Models\Backend\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,12 +25,8 @@ class BrandController extends Controller
         return Inertia::render('Backend/Brand/Create');
     }
 
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'image' => 'nullable|mimes:jpg,png,jpeg|max:1024'
-        ]);
 
         $slug = Str::slug($request->name);
 
@@ -58,12 +55,8 @@ class BrandController extends Controller
 
     public function update(){}
 
-    public function brandUpdate(Request $request, Brand $brand)
+    public function brandUpdate(BrandRequest $request, Brand $brand)
     {
-        $request->validate([
-            'name' => 'required',
-            'newImage' => 'nullable|mimes:jpg,png,jpeg|max:1024'
-        ]);
 
         if($request->hasFile('newimage')){
             $image = $request->file('newimage')->store('images/brands');

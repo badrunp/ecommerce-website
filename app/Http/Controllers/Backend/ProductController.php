@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Backend\Category;
 use App\Models\Backend\Color;
 use App\Models\Backend\Product;
@@ -53,19 +54,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:products,name',
-            'regular_price' => 'required',
-            'sale_price' => 'nullable',
-            'quantity' => 'required',
-            'description' => 'required',
-            'sumary' => 'nullable',
-            'category_id' => 'required',
-            'sizes' => 'required',
-            'colors' => 'required'
-        ]);
 
         DB::transaction(function () use ($request) {
             

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Backend\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,12 +25,8 @@ class CategoryController extends Controller
         return Inertia::render('Backend/Category/Create');
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'image' => 'nullable|mimes:jpg,png,jpeg|max:1024'
-        ]);
 
         $slug = Str::slug($request->name);
 
@@ -58,13 +55,8 @@ class CategoryController extends Controller
 
     public function update(){}
 
-    public function categoryUpdate(Request $request, Category $category)
+    public function categoryUpdate(CategoryRequest $request, Category $category)
     {
-        $request->validate([
-            'name' => 'required',
-            'newImage' => 'nullable|mimes:jpg,png,jpeg|max:1024'
-        ]);
-
         if($request->hasFile('newimage')){
             $image = $request->file('newimage')->store('images/category');
             if($request->has('image')){

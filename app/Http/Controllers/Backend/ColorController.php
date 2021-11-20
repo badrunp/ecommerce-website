@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ColorRequest;
 use App\Models\Backend\Color;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -24,12 +25,8 @@ class ColorController extends Controller
         return Inertia::render('Backend/Color/Create');
     }
 
-    public function store(Request $request)
+    public function store(ColorRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:colors,name',
-            'code' => 'required'
-        ]);
 
         $slug = Str::slug($request->name);
 

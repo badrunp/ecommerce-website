@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SizeRequest;
 use App\Models\Backend\Size;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -23,11 +24,8 @@ class SizeController extends Controller
         return Inertia::render('Backend/Size/Create');
     }
 
-    public function store(Request $request)
+    public function store(SizeRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:sizes,name',
-        ]);
 
         $slug = Str::slug($request->name);
 
