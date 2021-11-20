@@ -13,7 +13,7 @@ class SizeController extends Controller
 {
     public function index(Request $request)
     {
-        $sizes = Size::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
+        $sizes = Size::sorting($request->query('sorting'))->search($request->query('search'))->select(['id', 'name', 'slug', 'status'])->paginate($request->has('limit') ? $request->query('limit') : 10)->withQueryString();
         return  Inertia::render('Backend/Size/Size', [
             'sizes' => $sizes,
             'queries' => $request->query()
