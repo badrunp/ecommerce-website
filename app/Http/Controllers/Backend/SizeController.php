@@ -27,12 +27,7 @@ class SizeController extends Controller
     public function store(SizeRequest $request)
     {
 
-        $slug = Str::slug($request->name);
-
-        Size::create([
-            'name' => ucfirst($request->name),
-            'slug' => $slug,
-        ]);
+        Size::create($request->only(['name', 'slug']));
         
         return redirect()->route('backend.sizes.index');
     }
@@ -53,12 +48,7 @@ class SizeController extends Controller
 
     public function sizeUpdate(SizeRequest $request, Size $size)
     {
-
-        $slug = Str::slug($request->name);
-        $size->update([
-            'name' => ucfirst($request->name),
-            'slug' => $slug,
-        ]);
+        $size->update($request->only(['name', 'slug']));
 
         return redirect()->route('backend.sizes.index');
     }
