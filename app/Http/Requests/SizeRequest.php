@@ -24,7 +24,7 @@ class SizeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:sizes,name',
+            'name' => 'required|unique:sizes,name,' . optional($this->size)->id,
         ];
     }
 }

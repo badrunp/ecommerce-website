@@ -24,7 +24,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:products,name',
+            'name' => 'required|unique:products,name,' . optional($this->product)->id,
             'regular_price' => 'required',
             'sale_price' => 'nullable',
             'quantity' => 'required',

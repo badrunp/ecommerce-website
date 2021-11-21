@@ -95,21 +95,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function productUpdate(Request $request, Product $product)
+    public function productUpdate(ProductRequest $request, Product $product)
     {
-
-        $request->validate([
-            'name' => 'required|unique:products,name,' . $product->id,
-            'regular_price' => 'required',
-            'sale_price' => 'nullable',
-            'quantity' => 'required',
-            'description' => 'required',
-            'sumary' => 'nullable',
-            'category_id' => 'required',
-            'sizes' => 'required',
-            'colors' => 'required'
-        ]);
-
         DB::transaction(function () use ($request, $product) {
 
             $slug = Str::slug($request->name);

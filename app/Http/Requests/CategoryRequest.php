@@ -24,7 +24,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:categories,name,' . optional($this->category)->id,
             'image' => 'nullable|mimes:jpg,png,jpeg|max:1024'
         ];
     }

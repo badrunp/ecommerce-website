@@ -51,11 +51,8 @@ class SizeController extends Controller
 
     public function update(){}
 
-    public function sizeUpdate(Request $request, Size $size)
+    public function sizeUpdate(SizeRequest $request, Size $size)
     {
-        $request->validate([
-            'name' => 'required|unique:sizes,name,' . $size->id,
-        ]);
 
         $slug = Str::slug($request->name);
         $size->update([

@@ -53,13 +53,8 @@ class ColorController extends Controller
 
     public function update(){}
 
-    public function colorUpdate(Request $request, Color $color)
+    public function colorUpdate(ColorRequest $request, Color $color)
     {
-        $request->validate([
-            'name' => 'required|unique:colors,name,' . $color->id,
-            'code' => 'required'
-        ]);
-
         $slug = Str::slug($request->name);
         $color->update([
             'name' => ucfirst($request->name),
