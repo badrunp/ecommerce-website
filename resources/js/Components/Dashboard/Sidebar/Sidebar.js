@@ -33,7 +33,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, width }) {
     }, [width])
     return (
         <>
-            <motion.div variants={openSidebarVariants} initial={false} animate={sidebarOpen ? 'open' : 'close'} className="w-60 fixed top-0 left-0 bg-gradient-to-bl from-blue-500 via-blue-400 to-blue-700 flex-shrink-0 h-screen overflow-hidden">
+            <motion.div variants={openSidebarVariants} initial={false} animate={sidebarOpen ? 'open' : 'close'} className="w-60 fixed top-0 left-0 bg-gradient-to-bl from-blue-600 via-blue-500 to-blue-300 flex-shrink-0 h-screen overflow-hidden">
                 <div className="flex flex-col items-start py-4">
                     {
                         menuSidebars && menuSidebars.map((menu, index) => (
@@ -45,7 +45,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, width }) {
                                 <AnimatePresence key={index} exitBeforeEnter>
                                     {
                                         menu.children && menu.children.length > 0 && openItemSidebar[index] && (
-                                            <motion.div variants={menuSidebarVariants} custom={260} initial={initial ? false : 'hidden'} animate="visible" exit="exit" className="w-full bg-transparent flex flex-col items-start justify-center overflow-hidden rounded-md space-y-6">
+                                            <motion.div variants={menuSidebarVariants} custom={260} initial={initial ? false : 'hidden'} animate="visible" exit="exit" className="w-full bg-white flex flex-col items-start justify-center overflow-hidden rounded-l-md space-y-6">
                                                 {
                                                     menu.children.map((chil, i) => (
                                                         <SidebarSubItem key={chil.id} index={i} data={chil} />

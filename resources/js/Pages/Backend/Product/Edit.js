@@ -31,10 +31,18 @@ function Edit({ product, categories, sizes, colors }) {
     }
 
     const headers = [
-        'Dashboard',
-        'Products',
-        <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />
-
+        {
+            title: 'Dashboard',
+            url: route('backend.dashboard')
+        },
+        {
+            title: 'Products',
+            url: route('backend.products.index')
+        },
+        {
+            title: <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />,
+            url: route('backend.products.edit', product)
+        }
     ]
 
     return (

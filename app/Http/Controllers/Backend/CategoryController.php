@@ -8,7 +8,6 @@ use App\Models\Backend\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -28,15 +27,10 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
 
-        $slug = Str::slug($request->name);
+        $datas = $request->all();
+        $datas['image'] = $request->hasFile('image') ? $request->file('image')->store('images/category') : null;
 
-        Category::create([
-            'name' => $request->name,
-            'slug' => $slug,
-            'status' => 'active',
-            'image' => $request->hasFile('image') ? $request->file('image')->store('images/category') : null,
-            'is_home' => $request->boolean('is_home')
-        ]);
+        Category::create($datas);
         
         return redirect()->route('backend.categories.index');
     }
@@ -66,13 +60,9 @@ class CategoryController extends Controller
             $image = $request->has('image') ? $request->image : null;
         }
 
-        $slug = Str::slug($request->name);
-        $category->update([
-            'name' => $request->name,
-            'slug' => $slug,
-            'image' => $image,
-            'is_home' => $request->boolean('is_home')
-        ]);
+        $datas = $request->all();
+        $datas['image'] = $image;
+        $category->update($datas);
 
         return redirect()->route('backend.categories.index');
     }

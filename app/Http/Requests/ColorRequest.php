@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class ColorRequest extends FormRequest
 {
@@ -27,5 +28,14 @@ class ColorRequest extends FormRequest
             'name' => 'required|unique:colors,name,' . optional($this->color)->id,
             'code' => 'required|unique:colors,code,' . optional($this->color)->id
         ];
+    }
+
+    public function prepareForValidation(){
+        $this->merge([
+            'name' => ucfirst($this->name),
+            'slug' => Str::slug($this->name),
+            'code' => strtolower($this->code)
+        ]);
+
     }
 }

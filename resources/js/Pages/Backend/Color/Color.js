@@ -26,9 +26,23 @@ function Color({ colors, queries = {} }) {
         setSearch(e.target.value);
     }
 
+    const headers = [
+        {
+            title: 'Dashboard',
+            url: route('backend.dashboard')
+        },
+        {
+            title: 'Products',
+            url: route('backend.products.index')
+        },
+        {
+            title: 'Colors',
+            url: route('backend.colors.index')
+        }
+    ]
 
     return (
-        <Authenticated headers={['Dashboard', 'Colors']} title="Dashboard | Colors">
+        <Authenticated headers={headers} title="Dashboard | Colors">
             <ContainerComponent className="mb-3">
                 <div className="flex flex-row items-center justify-between space-x-5 md:space-x-8">
                     <div className="flex flex-row items-center space-x-2 md:space-x-4">

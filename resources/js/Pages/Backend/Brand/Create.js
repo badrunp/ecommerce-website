@@ -23,9 +23,22 @@ function Create() {
     }
 
     const headers = [
-        'Dasboard',
-        'Brands',
-        <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />
+        {
+            title: 'Dashboard',
+            url: route('backend.dashboard')
+        },
+        {
+            title: 'Products',
+            url: route('backend.products.index')
+        },
+        {
+            title: 'Brands',
+            url: route('backend.brands.index')
+        },
+        {
+            title: <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />,
+            url: route('backend.brands.create')
+        }
     ]
 
     return (

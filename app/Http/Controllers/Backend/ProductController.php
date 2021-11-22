@@ -11,7 +11,6 @@ use App\Models\Backend\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -59,18 +58,7 @@ class ProductController extends Controller
 
         DB::transaction(function () use ($request) {
             
-            $slug = Str::slug($request->name);
-
-            $product = Product::create([
-                'name' => $request->name,
-                'slug' => $slug,
-                'regular_price' => $request->regular_price,
-                'sale_price' => $request->sale_price,
-                'quantity' => $request->quantity,
-                'description' => $request->description,
-                'sumary' => $request->sumary,
-                'category_id' => $request->category_id,
-            ]);
+            $product = Product::create($request->except(['sizes', 'colors']));
 
             $product->sizes()->sync($request->sizes);
             $product->colors()->sync($request->colors);
@@ -99,18 +87,7 @@ class ProductController extends Controller
     {
         DB::transaction(function () use ($request, $product) {
 
-            $slug = Str::slug($request->name);
-
-            $product->update([
-                'name' => $request->name,
-                'slug' => $slug,
-                'regular_price' => $request->regular_price,
-                'sale_price' => $request->sale_price,
-                'quantity' => $request->quantity,
-                'description' => $request->description,
-                'sumary' => $request->sumary,
-                'category_id' => $request->category_id,
-            ]);
+            $product->update($request->except(['sizes', 'colors']));
 
             $product->sizes()->sync(collect($request->sizes)->pluck('value'));
             $product->colors()->sync(collect($request->colors)->pluck('value'));

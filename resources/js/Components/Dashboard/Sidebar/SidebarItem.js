@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 function SidebarItem({ menu, index, handleClickOpenItems, openItemSidebar }) {
     const {url} = usePage();
         return (
-        <Link as={menu.children && menu.children.length > 0 ? 'button' : 'a'} href={menu.link} onClick={(e) => handleClickOpenItems(e, index, menu.children && menu.children.length > 0 ? 'button' : 'a')} className={`flex flex-row items-center justify-between space-x-4 py-1 my-3 w-full pr-6 pl-8 ${url.startsWith(`/dashboard/${menu.title.toLowerCase()}`) ? 'bg-gray-50 py-2' : ''}`}>
+        <Link as={menu.children && menu.children.length > 0 ? 'button' : 'a'} href={menu.link} onClick={(e) => handleClickOpenItems(e, index, menu.children && menu.children.length > 0 ? 'button' : 'a')} className={`flex flex-row items-center justify-between space-x-4 py-2 my-2 w-full pr-6 pl-8 ${url.startsWith(`/dashboard/${menu.title.toLowerCase()}`) ? 'bg-white' : ''}`}>
             {menu.mt ? (
                 <menu.icon className={`w-6 h-6 flex-shrink-0 ${url.startsWith(`/dashboard/${menu.title.toLowerCase()}`) ? 'text-gray-600' : 'text-white'} fill-current`} />
             ) : (

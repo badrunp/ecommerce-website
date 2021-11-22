@@ -28,8 +28,19 @@ function Product({ products, queries = {} }) {
         setSearch(e.target.value);
     }
 
+    const headers = [
+        {
+            title: 'Dashboard',
+            url: route('backend.dashboard')
+        },
+        {
+            title: 'Products',
+            url: route('backend.products.index')
+        }
+    ]
+
     return (
-        <Authenticated headers={['Dashboard', 'Products']} title="Dashboard | Products">
+        <Authenticated headers={headers} title="Dashboard | Products">
             <ContainerComponent className="mb-3">
                 <div className="flex flex-row items-center justify-between space-x-5 md:space-x-8">
                     <div className="flex flex-row items-center space-x-2 md:space-x-4">

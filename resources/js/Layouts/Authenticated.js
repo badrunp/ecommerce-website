@@ -31,30 +31,28 @@ export default function Authenticated({ children, headers, title = 'Dashboard' }
                             <div className={`px-4 md:px-6 py-4 ${headers && headers.length > 0 ? 'md:py-4' : 'md:py-5'}`}>
                                 {
                                     headers && (
-                                        <div className="mb-3 md:mb-6 md:mt-2">
-                                            <div className="flex flex-row items-center justify-start space-x-2">
+                                        <nav className="mb-3 md:mb-6 md:mt-2" aria-label="Breadcrumb">
+                                            <ol className="inline-flex items-center space-x-1 md:space-x-2">
                                                 {
                                                     headers.map((item, index) => {
-                                                        let routeUrl;
-                                                        if(index === 0){
-                                                            routeUrl = route('backend.dashboard')
-                                                        }else if(index === 1){
-                                                            routeUrl = route(`backend.${item.toLowerCase()}.index`)
-                                                        }else if(index === 2) {
-                                                            routeUrl = url;
-                                                        }else{
-                                                            routeUrl = route('backend.dashboard')
-                                                        }
                                                         return (
                                                             <React.Fragment key={index}>
-                                                                <Link href={routeUrl} className="text-gray-600 text-sm md:tracking-wide font-semibold md:text-base">{item}</Link>
-                                                                {index != headers.length - 1 ? <h4 className="text-gray-600 text-sm font-semibold">{`>`}</h4> : null}
+                                                                <li className="inline-flex items-center">
+                                                                    <Link href={item.url} className="text-gray-700 hover:text-gray-900 inline-flex items-center">
+                                                                        {index != 0 ? (
+                                                                            <svg className="w-6 h-6 text-gray-400 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
+                                                                        ) : (
+                                                                            <svg className="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg> 
+                                                                        )}
+                                                                        {item.title}
+                                                                    </Link>
+                                                                </li>
                                                             </React.Fragment>
                                                         )
                                                     })
                                                 }
-                                            </div>
-                                        </div>
+                                            </ol>
+                                        </nav>
                                     )
                                 }
 

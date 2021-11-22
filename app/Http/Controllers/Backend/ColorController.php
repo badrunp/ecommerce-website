@@ -7,7 +7,6 @@ use App\Http\Requests\ColorRequest;
 use App\Models\Backend\Color;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 
 class ColorController extends Controller
 {
@@ -27,14 +26,7 @@ class ColorController extends Controller
 
     public function store(ColorRequest $request)
     {
-
-        $slug = Str::slug($request->name);
-
-        Color::create([
-            'name' => ucfirst($request->name),
-            'slug' => $slug,
-            'code' => strtolower($request->code)
-        ]);
+        Color::create($request->all());
         
         return redirect()->route('backend.colors.index');
     }
@@ -55,12 +47,7 @@ class ColorController extends Controller
 
     public function colorUpdate(ColorRequest $request, Color $color)
     {
-        $slug = Str::slug($request->name);
-        $color->update([
-            'name' => ucfirst($request->name),
-            'slug' => $slug,
-            'code' =>  strtolower($request->code)
-        ]);
+        $color->update($request->all());
 
         return redirect()->route('backend.colors.index');
     }

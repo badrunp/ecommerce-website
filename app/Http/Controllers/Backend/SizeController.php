@@ -7,7 +7,6 @@ use App\Http\Requests\SizeRequest;
 use App\Models\Backend\Size;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 
 class SizeController extends Controller
 {
@@ -27,7 +26,7 @@ class SizeController extends Controller
     public function store(SizeRequest $request)
     {
 
-        Size::create($request->only(['name', 'slug']));
+        Size::create($request->all());
         
         return redirect()->route('backend.sizes.index');
     }
@@ -48,7 +47,7 @@ class SizeController extends Controller
 
     public function sizeUpdate(SizeRequest $request, Size $size)
     {
-        $size->update($request->only(['name', 'slug']));
+        $size->update($request->all());
 
         return redirect()->route('backend.sizes.index');
     }

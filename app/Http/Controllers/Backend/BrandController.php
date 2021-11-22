@@ -8,7 +8,6 @@ use App\Models\Backend\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 
 class BrandController extends Controller
 {
@@ -27,16 +26,9 @@ class BrandController extends Controller
 
     public function store(BrandRequest $request)
     {
-
-        $slug = Str::slug($request->name);
-
-        Brand::create([
-            'name' => $request->name,
-            'slug' => $slug,
-            'status' => 'active',
-            'image' => $request->hasFile('image') ? $request->file('image')->store('images/brands') : null,
-            'is_home' => $request->boolean('is_home')
-        ]);
+        $datas = $request->all();
+        $datas['image'] = $request->hasFile('image') ? $request->file('image')->store('images/brands') : null;
+        Brand::create($datas);
         
         return redirect()->route('backend.brands.index');
     }
@@ -67,13 +59,9 @@ class BrandController extends Controller
             $image = $request->has('image') ? $request->image : null;
         }
 
-        $slug = Str::slug($request->name);
-        $brand->update([
-            'name' => $request->name,
-            'slug' => $slug,
-            'image' => $image,
-            'is_home' => $request->boolean('is_home')
-        ]);
+        $datas = $request->all();
+        $datas['image'] = $image;
+        $brand->update($datas);
 
         return redirect()->route('backend.brands.index');
     }

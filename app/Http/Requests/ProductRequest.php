@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class ProductRequest extends FormRequest
 {
@@ -34,5 +35,20 @@ class ProductRequest extends FormRequest
             'sizes' => 'required',
             'colors' => 'required'
         ];
+    }
+
+    public function prepareForValidation()
+    {
+
+        $this->merge([
+            'name' => $this->name,
+            'slug' => Str::slug($this->name),
+            'regular_price' => $this->regular_price,
+            'sale_price' => $this->sale_price,
+            'quantity' => $this->quantity,
+            'description' => $this->description,
+            'sumary' => $this->sumary,
+            'category_id' => $this->category_id,
+        ]);
     }
 }

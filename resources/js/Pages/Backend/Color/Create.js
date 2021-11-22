@@ -25,9 +25,22 @@ function Create() {
     }
 
     const headers = [
-        'Dasboard',
-        'Colors',
-        <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />
+        {
+            title: 'Dashboard',
+            url: route('backend.dashboard')
+        },
+        {
+            title: 'Products',
+            url: route('backend.products.index')
+        },
+        {
+            title: 'Colors',
+            url: route('backend.colors.index')
+        },
+        {
+            title: <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />,
+            url: route('backend.colors.create')
+        }
     ]
 
     useEffect(() => {

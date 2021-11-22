@@ -20,10 +20,22 @@ function Edit({size}) {
     }
 
     const headers = [
-        'Dashboard',
-        'Sizes',
-        <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />
-        
+        {
+            title: 'Dashboard',
+            url: route('backend.dashboard')
+        },
+        {
+            title: 'Products',
+            url: route('backend.products.index')
+        },
+        {
+            title: 'Sizes',
+            url: route('backend.sizes.index')
+        },
+        {
+            title: <IoCreateOutline className="h-4 w-4 md:w-5 md:h-5" />,
+            url: route('backend.sizes.edit', size)
+        }
     ]
 
     return (

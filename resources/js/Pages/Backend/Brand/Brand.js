@@ -26,9 +26,23 @@ function Brand({ brands, queries = {} }) {
         setSearch(e.target.value);
     }
 
+    const headers = [
+        {
+            title: 'Dashboard',
+            url: route('backend.dashboard')
+        },
+        {
+            title: 'Products',
+            url: route('backend.products.index')
+        },
+        {
+            title: 'Brands',
+            url: route('backend.brands.index')
+        }
+    ]
 
     return (
-        <Authenticated headers={['Dashboard', 'brands']} title="Dashboard | brands">
+        <Authenticated headers={headers} title="Dashboard | brands">
             <ContainerComponent className="mb-3">
                 <div className="flex flex-row items-center justify-between space-x-5 md:space-x-8">
                     <div className="flex flex-row items-center space-x-2 md:space-x-4">

@@ -10,8 +10,8 @@ function SidebarSubItem({ data, index }) {
     return (
         <motion.div variants={itemSidebarVariants} custom={index} key={data.id} className="w-full">
             <Link href={data.link} className={`flex flex-row items-center justify-between space-x-4 py-1 w-full pl-6`}>
-                <data.icon className={`w-5 h-5 fill-current ${url.startsWith(`/dashboard/products/${data.title.toLowerCase()}`) ? 'text-white' : 'text-white'}`} />
-                <h1 className={`block flex-grow text-sm tracking-wide ${url.startsWith(`/dashboard/products/${data.title.toLowerCase()}`) ? 'text-white font-bold  ' : 'text-white'}`}>{data.title}</h1>
+                <data.icon className={`w-5 h-5 fill-current ${url.startsWith(`/dashboard/products/${data.title.toLowerCase()}`) ? 'text-blue-600' : 'text-gray-600'}`} />
+                <h1 className={`block flex-grow text-sm tracking-wide ${url.startsWith(`/dashboard/products/${data.title.toLowerCase()}`) ? 'text-blue-600 font-bold  ' : 'text-gray-600'}`}>{data.title}</h1>
             </Link>
         </motion.div>
     )
