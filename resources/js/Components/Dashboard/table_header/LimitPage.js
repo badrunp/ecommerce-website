@@ -11,8 +11,8 @@ function LimitPage({ queries, setIsPerPage, isPerPage, perPage }) {
         <>
             <div className="relative">
                 <ButtonDropdown handleClick={() => setIsPerPage(!isPerPage)}>
-                    <span className="hidden sm:block text-xs md:text-sm">Limit : {queries && queries.limit ? queries.limit : 10}</span>
-                    <span className="block md:hidden"><IoListOutline className="h-4 w-4 md:w-6 md:h-6" /></span>
+                    <span className="hidden lg:block text-xs lg:text-sm">Limit : {queries && queries.limit ? queries.limit : 10}</span>
+                    <span className="block lg:hidden"><IoListOutline className="h-4 w-4 lg:w-6 lg:h-6" /></span>
                     <motion.span variants={arrowVariants} custom={0} initial={false} animate={isPerPage ? 'up' : 'down'} className="block"><IoIosArrowDown  /></motion.span>
                 </ButtonDropdown>
                 <NormalDropdown type={{ name: 'link', is: 'sort' }} query="limit" value={queries && queries.limit ? queries.limit : 10} className="px-8" listItem={perPage} isOpen={isPerPage} handleClose={() => setIsPerPage(false)} />

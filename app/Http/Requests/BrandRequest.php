@@ -25,7 +25,7 @@ class BrandRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:brands,name,' . $this->brand->id,
+            'name' => 'required|unique:brands,name,' . optional($this->brand)->id,
             'image' => !$this->brand ? 'nullable|mimes:jpg,png,jpeg|max:1024' : '',
             'newimage' => $this->brand ? 'nullable|mimes:jpg,png,jpeg|max:1024' : '',
         ];

@@ -33,7 +33,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, width }) {
     }, [width])
     return (
         <>
-            <motion.div variants={openSidebarVariants} initial={false} animate={sidebarOpen ? 'open' : 'close'} className="w-60 fixed top-0 left-0 bg-gradient-to-bl from-blue-600 via-blue-500 to-blue-300 flex-shrink-0 h-screen overflow-hidden">
+            <motion.div variants={openSidebarVariants} initial={false} animate={sidebarOpen ? 'open' : 'close'} className="w-60 fixed top-0 left-0 bg-gradient-to-bl from-gray-800 via-gray-800 to-gray-700 flex-shrink-0 h-screen overflow-x-hidden">
                 <div className="flex flex-col items-start py-4">
                     {
                         menuSidebars && menuSidebars.map((menu, index) => (

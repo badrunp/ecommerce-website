@@ -25,7 +25,7 @@ class ProductController extends Controller
 
     private function sizes()
     {
-        return collect(Size::where('status', 'active')->get())->map(function ($size) {
+        return collect(Size::select(['id','name'])->where('status', 'active')->get())->map(function ($size) {
             return [
                 'value' => $size->id,
                 'label' => $size->name
@@ -35,7 +35,7 @@ class ProductController extends Controller
 
     private function colors()
     {
-        return collect(Color::where('status', 'active')->get())->map(function ($color) {
+        return collect(Color::select(['id','name'])->where('status', 'active')->get())->map(function ($color) {
             return [
                 'value' => $color->id,
                 'label' => $color->name,
@@ -47,7 +47,7 @@ class ProductController extends Controller
     public function create()
     {
         return Inertia::render('Backend/Product/Create', [
-            'categories' => Category::where('status', 'active')->get(),
+            'categories' => Category::select(['id','name'])->where('status', 'active')->get(),
             'colors' => $this->colors(),
             'sizes' => $this->sizes(),
         ]);

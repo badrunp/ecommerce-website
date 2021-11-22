@@ -101,7 +101,7 @@ function NavbarRight() {
                                             menuUserNavbarDropdown.map((item) => (
                                                 <Link key={item.id} href={item.link} as={item.method != 'GET' ? 'button' : 'a'} onClick={(e) => handleLogout(e, item.method)} className="text-gray-500 text-sm font-semibold py-2 w-full px-2 flex items-center space-x-3 rounded hover:bg-gray-100">
                                                     <item.icon className="text-gray-600 w-5 h-5" />
-                                                    <span className="block tracking-wide">{item.title}</span>
+                                                    <span className="block">{item.title}</span>
                                                 </Link>
                                             ))
                                         }
