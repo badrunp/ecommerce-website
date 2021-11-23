@@ -11,4 +11,10 @@ class Size extends Model
     use HasFactory, QueryDatabaseTrait;
 
     protected $fillable = ['name', 'slug', 'status'];
+
+    public function products(){
+
+        return $this->belongsToMany(Product::class, 'product_size');
+
+    }
 }

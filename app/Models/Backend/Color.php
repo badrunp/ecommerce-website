@@ -11,4 +11,10 @@ class Color extends Model
     use HasFactory, QueryDatabaseTrait;
 
     protected $fillable = ['name', 'slug', 'code', 'status'];
+
+    public function products(){
+
+        return $this->belongsToMany(Product::class, 'color_product');
+        
+    }
 }
