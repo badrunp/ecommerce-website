@@ -42,13 +42,7 @@ class ProductRequest extends FormRequest
 
         $this->merge([
             'name' => $this->name,
-            'slug' => Str::slug($this->name),
-            'regular_price' => $this->regular_price,
-            'sale_price' => $this->sale_price,
-            'quantity' => $this->quantity,
-            'description' => $this->description,
-            'sumary' => $this->sumary,
-            'category_id' => $this->category_id,
+            'slug' => Str::slug($this->name)
         ]);
     }
 }

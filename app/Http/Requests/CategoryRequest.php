@@ -37,7 +37,6 @@ class CategoryRequest extends FormRequest
             'name' => ucfirst($this->name),
             'slug' => Str::slug($this->name),
             'status' => 'active',
-            'is_home' => $this->boolean('is_home')
         ]);
     }
 }

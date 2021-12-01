@@ -23,7 +23,7 @@ class BrandController extends Controller
     {
         return Inertia::render('Backend/Brand/Create');
     }
-
+ 
     public function store(BrandRequest $request)
     {
         $datas = $request->all();

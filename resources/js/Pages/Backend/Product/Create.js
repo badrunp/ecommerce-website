@@ -26,6 +26,7 @@ function Create({ categories, sizes, colors }) {
         colors: []
     })
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route('backend.show.store'));

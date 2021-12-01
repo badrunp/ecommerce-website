@@ -1128,9 +1128,6 @@ select {
 .overflow-y-hidden {
 	overflow-y: hidden;
 }
-.overflow-y-scroll {
-	overflow-y: scroll;
-}
 .truncate {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1253,33 +1250,12 @@ select {
 	--tw-gradient-from: #3b82f6;
 	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0));
 }
-.from-blue-600 {
-	--tw-gradient-from: #2563eb;
-	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(37, 99, 235, 0));
-}
-.from-gray-600 {
-	--tw-gradient-from: #4b5563;
-	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(75, 85, 99, 0));
-}
-.from-gray-900 {
-	--tw-gradient-from: #111827;
-	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(17, 24, 39, 0));
-}
 .from-gray-800 {
 	--tw-gradient-from: #1f2937;
 	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(31, 41, 55, 0));
 }
 .via-gray-900 {
 	--tw-gradient-stops: var(--tw-gradient-from), #111827, var(--tw-gradient-to, rgba(17, 24, 39, 0));
-}
-.via-blue-500 {
-	--tw-gradient-stops: var(--tw-gradient-from), #3b82f6, var(--tw-gradient-to, rgba(59, 130, 246, 0));
-}
-.via-gray-500 {
-	--tw-gradient-stops: var(--tw-gradient-from), #6b7280, var(--tw-gradient-to, rgba(107, 114, 128, 0));
-}
-.via-gray-600 {
-	--tw-gradient-stops: var(--tw-gradient-from), #4b5563, var(--tw-gradient-to, rgba(75, 85, 99, 0));
 }
 .via-gray-800 {
 	--tw-gradient-stops: var(--tw-gradient-from), #1f2937, var(--tw-gradient-to, rgba(31, 41, 55, 0));
@@ -1289,15 +1265,6 @@ select {
 }
 .to-blue-600 {
 	--tw-gradient-to: #2563eb;
-}
-.to-blue-300 {
-	--tw-gradient-to: #93c5fd;
-}
-.to-gray-300 {
-	--tw-gradient-to: #d1d5db;
-}
-.to-gray-800 {
-	--tw-gradient-to: #1f2937;
 }
 .to-gray-700 {
 	--tw-gradient-to: #374151;
@@ -1706,10 +1673,6 @@ select {
 .active\:bg-gray-100:active {
 	--tw-bg-opacity: 1;
 	background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
-}
-.active\:bg-gray-900:active {
-	--tw-bg-opacity: 1;
-	background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
 }
 .active\:text-gray-700:active {
 	--tw-text-opacity: 1;

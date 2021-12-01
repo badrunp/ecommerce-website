@@ -35,7 +35,7 @@ class ProductController extends Controller
 
     private function colors()
     {
-        return collect(Color::select(['id','name'])->where('status', 'active')->get())->map(function ($color) {
+        return collect(Color::select(['id','name', 'code'])->where('status', 'active')->get())->map(function ($color) {
             return [
                 'value' => $color->id,
                 'label' => $color->name,
@@ -85,6 +85,7 @@ class ProductController extends Controller
 
     public function productUpdate(ProductRequest $request, Product $product)
     {
+
         DB::transaction(function () use ($request, $product) {
 
             $product->update($request->except(['sizes', 'colors']));
