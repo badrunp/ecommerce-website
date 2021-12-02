@@ -7,6 +7,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Backend\Category;
 use App\Models\Backend\Color;
 use App\Models\Backend\Product;
+use App\Models\Backend\ProductImages;
 use App\Models\Backend\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,13 +56,19 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-
         DB::transaction(function () use ($request) {
             
             $product = Product::create($request->except(['sizes', 'colors']));
 
             $product->sizes()->sync($request->sizes);
             $product->colors()->sync($request->colors);
+
+            foreach($request->images as $image){
+                ProductImages::create([
+                    'image' => $image->store('images/products'),
+                    'product_id' => $product->id
+                ]);
+            }
 
         });
 
@@ -76,7 +83,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return Inertia::render('Backend/Product/Edit', [
-            'product' => $product->load(['sizes', 'colors']),
+            'product' => $product->load(['sizes', 'colors', 'images']),
             'categories' => Category::where('status', 'active')->get(),
             'sizes' => $this->sizes(),
             'colors' => $this->colors()
@@ -85,13 +92,30 @@ class ProductController extends Controller
 
     public function productUpdate(ProductRequest $request, Product $product)
     {
-
+        dd($request->all());
         DB::transaction(function () use ($request, $product) {
 
             $product->update($request->except(['sizes', 'colors']));
 
             $product->sizes()->sync(collect($request->sizes)->pluck('value'));
             $product->colors()->sync(collect($request->colors)->pluck('value'));
+
+            $product->images()->delete();
+            foreach($request->images as $key => $image){
+                if($image){
+                    ProductImages::create([
+                        'image' => $image->store('images/products'),
+                        'product_id' => $product->id
+                    ]);
+
+                }else{
+                    ProductImages::create([
+                        'image' => $image['image'],
+                        'product_id' => $product->id
+                    ]);
+
+                }
+            }
 
         });
 

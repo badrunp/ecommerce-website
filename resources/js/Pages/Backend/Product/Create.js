@@ -8,8 +8,9 @@ import Textarea from '@/Components/Textarea'
 import { colourStyles } from '@/Config/react_select/config'
 import Authenticated from '@/Layouts/Authenticated'
 import { useForm } from '@inertiajs/inertia-react'
-import React from 'react'
-import { IoCreateOutline } from 'react-icons/io5'
+import { motion } from 'framer-motion'
+import React, { useState } from 'react'
+import { IoCloseCircle, IoCreateOutline } from 'react-icons/io5'
 import Select from 'react-select';
 
 function Create({ categories, sizes, colors }) {
@@ -23,9 +24,10 @@ function Create({ categories, sizes, colors }) {
         sumary: '',
         category_id: '',
         sizes: [],
-        colors: []
+        colors: [],
+        images: []
     })
-
+    const [imagesView, setImagesView] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,6 +48,29 @@ function Create({ categories, sizes, colors }) {
             url: route('backend.brands.create')
         }
     ]
+
+    const handleInputImages = (e) => {
+
+        let newImage = [];
+
+        for (let i = 0; i < e.target.files.length; i++) {
+            const image = data.images.find((item) => item.name === e.target.files[i].name)
+            if(!image){
+                newImage.push(e.target.files[i]); 
+            }
+        }
+
+        setData('images', [...data.images, ...newImage]);
+
+    }
+
+    const handleRemoveImage = (image) => {
+
+        const newImageView = data.images.filter(item => item.name !== image.name);
+
+        setData('images', newImageView);
+
+    }
 
     return (
         <Authenticated headers={headers} title="Dashboard | Create Products">
@@ -103,10 +128,7 @@ function Create({ categories, sizes, colors }) {
                                 )}
                             </div>
 
-                        </div>
-                        <div className="py-4">
-
-                            <div>
+                            <div className="mt-6">
                                 <Label forInput="category_id" value="Category" />
 
                                 <SelectInput value={data.category_id} items={categories} className="mt-2 block w-full" id="category_id" handleChange={(e) => setData('category_id', e.target.value)} />
@@ -150,8 +172,11 @@ function Create({ categories, sizes, colors }) {
                                     <ErrorMessage error={errors.colors} />
                                 )}
                             </div>
+                        </div>
+                        <div className="py-4">
 
-                            <div className="mt-6">
+
+                            <div>
                                 <Label forInput="description" value="Description" />
 
                                 <Textarea type="text" value={data.description} className="mt-2 block w-full" id="description" handleChange={(e) => setData('description', e.target.value)} />
@@ -169,6 +194,29 @@ function Create({ categories, sizes, colors }) {
                                 {errors.sumary && (
                                     <ErrorMessage error={errors.sumary} />
                                 )}
+                            </div>
+
+                            <div className="mt-6">
+                                <Label forInput="images" value="Images" />
+
+                                <Input type="file" className="mt-2 block w-full" id="images" handleChange={(e) => handleInputImages(e)} multiple />
+
+                                {errors.quantity && (
+                                    <ErrorMessage error={errors.images} />
+                                )}
+                            </div>
+
+                            <div className="grid grid-cols-3 gap-4 md:gap-6 mt-6">
+                                {
+                                    data.images.length > 0 && data.images.map((image) => (
+                                        <motion.div layout key={image.name} className="relative ring-1 p-1 ring-gray-300">
+                                            <div onClick={() => handleRemoveImage(image)} className="absolute -right-2 -top-2 cursor-pointer bg-white rounded-full ring-1 ring-red-500 text-red-500 hover:text-red-600">
+                                                <IoCloseCircle className="h-4 w-4 lg:w-5 lg:h-5" />
+                                            </div>
+                                            <img src={URL.createObjectURL(image)} alt={image} className="w-full h-full object-cover" />
+                                        </motion.div>
+                                    ))
+                                }
                             </div>
                         </div>
                     </div>

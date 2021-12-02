@@ -8,8 +8,9 @@ import Textarea from '@/Components/Textarea'
 import { colourStyles } from '@/Config/react_select/config'
 import Authenticated from '@/Layouts/Authenticated'
 import { useForm } from '@inertiajs/inertia-react'
+import { motion } from 'framer-motion'
 import React from 'react'
-import { IoCreateOutline } from 'react-icons/io5'
+import { IoCloseCircle, IoCreateOutline } from 'react-icons/io5'
 import Select from 'react-select';
 
 function Edit({ product, categories, sizes, colors }) {
@@ -22,13 +23,15 @@ function Edit({ product, categories, sizes, colors }) {
         sumary: product.sumary ? product.sumary : '',
         category_id: product.category_id,
         sizes: product.sizes && product.sizes.map(size => ({ value: size.id, label: size.name })),
-        colors: product.colors && product.colors.map(color => ({ value: color.id, label: color.name, color: color.code }))
+        colors: product.colors && product.colors.map(color => ({ value: color.id, label: color.name, color: color.code })),
+        images: product.images || []
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route('backend.products.productUpdate', product));
     }
+
 
     const headers = [
         {
@@ -44,6 +47,35 @@ function Edit({ product, categories, sizes, colors }) {
             url: route('backend.products.edit', product)
         }
     ]
+
+    const handleInputImages = (e) => {
+
+        let newImage = [];
+
+        for (let i = 0; i < e.target.files.length; i++) {
+            const image = data.images.find((item) => item.name === e.target.files[i].name)
+            if (!image) {
+                newImage.push(e.target.files[i]);
+            }
+        }
+
+        setData('images', [...data.images, ...newImage]);
+
+    }
+
+    const handleRemoveImage = (image) => {
+
+        let newImageView
+
+        if(image.image){
+            newImageView = data.images.filter(item => item.id !== image.id);
+        }else{
+            newImageView = data.images.filter(item => item.name !== image.name);
+        }
+
+        setData('images', newImageView);
+
+    }
 
     return (
         <Authenticated headers={headers} title="Dashboard | Edit Product">
@@ -101,10 +133,6 @@ function Edit({ product, categories, sizes, colors }) {
                                         <ErrorMessage error={errors.quantity} />
                                     )}
                                 </div>
-
-                            </div>
-                            <div className="py-4">
-
                                 <div>
                                     <Label forInput="category_id" value="Category" />
 
@@ -150,7 +178,9 @@ function Edit({ product, categories, sizes, colors }) {
                                     )}
                                 </div>
 
-                                <div className="mt-6">
+                            </div>
+                            <div className="py-4">
+                                <div>
                                     <Label forInput="description" value="Description" />
 
                                     <Textarea type="text" value={data.description} className="mt-2 block w-full" id="description" handleChange={(e) => setData('description', e.target.value)} />
@@ -168,6 +198,29 @@ function Edit({ product, categories, sizes, colors }) {
                                     {errors.sumary && (
                                         <ErrorMessage error={errors.sumary} />
                                     )}
+                                </div>
+
+                                <div className="mt-6">
+                                    <Label forInput="images" value="Images" />
+
+                                    <Input type="file" className="mt-2 block w-full" id="images" handleChange={(e) => handleInputImages(e)} multiple />
+
+                                    {errors.quantity && (
+                                        <ErrorMessage error={errors.images} />
+                                    )}
+                                </div>
+
+                                <div className="grid grid-cols-3 gap-4 md:gap-6 mt-6">
+                                    {
+                                        data.images.length > 0 && data.images.map((image) => (
+                                            <motion.div onClick={() => handleRemoveImage(image)} layout key={image.image || image.name} className="relative ring-1 p-1 ring-gray-300">
+                                                <div className="absolute -right-2 -top-2 cursor-pointer bg-white rounded-full ring-1 ring-red-500 text-red-500 hover:text-red-600">
+                                                    <IoCloseCircle className="h-4 w-4 lg:w-5 lg:h-5" />
+                                                </div>
+                                                <img src={` ${image.image ? `http://localhost:8000/storage/${image.image}` : URL.createObjectURL(image)}`} alt={image.image || image.name} className="w-full h-full object-cover" />
+                                            </motion.div>
+                                        ))
+                                    }
                                 </div>
                             </div>
                         </div>
