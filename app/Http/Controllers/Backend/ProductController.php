@@ -11,6 +11,7 @@ use App\Models\Backend\ProductImages;
 use App\Models\Backend\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -26,7 +27,7 @@ class ProductController extends Controller
 
     private function sizes()
     {
-        return collect(Size::select(['id','name'])->where('status', 'active')->get())->map(function ($size) {
+        return collect(Size::select(['id', 'name'])->where('status', 'active')->get())->map(function ($size) {
             return [
                 'value' => $size->id,
                 'label' => $size->name
@@ -36,7 +37,7 @@ class ProductController extends Controller
 
     private function colors()
     {
-        return collect(Color::select(['id','name', 'code'])->where('status', 'active')->get())->map(function ($color) {
+        return collect(Color::select(['id', 'name', 'code'])->where('status', 'active')->get())->map(function ($color) {
             return [
                 'value' => $color->id,
                 'label' => $color->name,
@@ -48,7 +49,7 @@ class ProductController extends Controller
     public function create()
     {
         return Inertia::render('Backend/Product/Create', [
-            'categories' => Category::select(['id','name'])->where('status', 'active')->get(),
+            'categories' => Category::select(['id', 'name'])->where('status', 'active')->get(),
             'colors' => $this->colors(),
             'sizes' => $this->sizes(),
         ]);
@@ -57,19 +58,18 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         DB::transaction(function () use ($request) {
-            
+
             $product = Product::create($request->except(['sizes', 'colors']));
 
             $product->sizes()->sync($request->sizes);
             $product->colors()->sync($request->colors);
 
-            foreach($request->images as $image){
+            foreach ($request->images as $image) {
                 ProductImages::create([
                     'image' => $image->store('images/products'),
                     'product_id' => $product->id
                 ]);
             }
-
         });
 
         return redirect()->route('backend.products.index');
@@ -92,32 +92,50 @@ class ProductController extends Controller
 
     public function productUpdate(ProductRequest $request, Product $product)
     {
-        dd($request->all());
-        DB::transaction(function () use ($request, $product) {
 
-            $product->update($request->except(['sizes', 'colors']));
+        DB::beginTransaction();
 
-            $product->sizes()->sync(collect($request->sizes)->pluck('value'));
-            $product->colors()->sync(collect($request->colors)->pluck('value'));
+        $product->update($request->except(['sizes', 'colors']));
 
-            $product->images()->delete();
-            foreach($request->images as $key => $image){
-                if($image){
-                    ProductImages::create([
-                        'image' => $image->store('images/products'),
-                        'product_id' => $product->id
-                    ]);
+        $product->sizes()->sync(collect($request->sizes)->pluck('value'));
+        $product->colors()->sync(collect($request->colors)->pluck('value'));
 
-                }else{
-                    ProductImages::create([
-                        'image' => $image['image'],
-                        'product_id' => $product->id
-                    ]);
+        $imagesId = [];
 
+        foreach ($request->images as $image) {
+            if (!is_array($image)) {
+                $newImage = ProductImages::create([
+                    'image' => $image->store('images/products'),
+                    'product_id' => $product->id
+                ]);
+
+                $imagesId[] = $newImage->id;
+            } else {
+                $imagesId[] = $image['id'];
+            }
+        }
+
+        $isImagesDelete = $product->images()->where('product_id', $product->id)->whereNotIn('id', $imagesId)->get();
+        $isImagesActive = $product->images()->where('product_id', $product->id)->whereIn('id', $imagesId)->get();
+
+        if (count($isImagesActive) > 0) {
+            if (count($isImagesDelete) > 0) {
+                foreach ($isImagesDelete as $isImageDelete) {
+                    if (Storage::exists($isImageDelete->image)) {
+                        Storage::delete($isImageDelete->image);
+                    }
                 }
             }
 
-        });
+            $product->images()->where('product_id', $product->id)->whereNotIn('id', $imagesId)->delete();
+        } else {
+            DB::rollBack();
+            return redirect()->route('backend.products.edit', $product)->with([
+                'images' => 'The images field is required.'
+            ]);
+        }
+
+        DB::commit();
 
         return redirect()->route('backend.products.index');
     }

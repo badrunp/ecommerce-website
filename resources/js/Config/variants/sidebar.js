@@ -67,13 +67,17 @@ const openSidebarVariants = {
         zIndex: 100,
         transition: {
             type: 'tween',
+            ease: "easeInOut",
+            duration: .2
         }
     },
     close: {
         width: 0,
         zIndex: 100,
         transition: {
-            type: 'tween'
+            type: 'tween',
+            ease: "easeInOut",
+            duration: .2
         }
     }
 }

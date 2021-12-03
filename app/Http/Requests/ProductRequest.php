@@ -33,7 +33,8 @@ class ProductRequest extends FormRequest
             'sumary' => 'nullable',
             'category_id' => 'required',
             'sizes' => 'required',
-            'colors' => 'required'
+            'colors' => 'required',
+            'images' => !$this->product ? 'required' : ''
         ];
     }
 

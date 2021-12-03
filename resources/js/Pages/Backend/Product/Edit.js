@@ -7,13 +7,16 @@ import SelectInput from '@/Components/SelectInput'
 import Textarea from '@/Components/Textarea'
 import { colourStyles } from '@/Config/react_select/config'
 import Authenticated from '@/Layouts/Authenticated'
-import { useForm } from '@inertiajs/inertia-react'
+import { useForm, usePage } from '@inertiajs/inertia-react'
 import { motion } from 'framer-motion'
 import React from 'react'
 import { IoCloseCircle, IoCreateOutline } from 'react-icons/io5'
 import Select from 'react-select';
 
 function Edit({ product, categories, sizes, colors }) {
+
+    const {session} = usePage().props;
+
     const { data, setData, post, errors } = useForm({
         name: product.name,
         regular_price: product.regular_price,
@@ -133,7 +136,8 @@ function Edit({ product, categories, sizes, colors }) {
                                         <ErrorMessage error={errors.quantity} />
                                     )}
                                 </div>
-                                <div>
+
+                                <div className="mt-6">
                                     <Label forInput="category_id" value="Category" />
 
                                     <SelectInput value={data.category_id} items={categories} className="mt-2 block w-full" id="category_id" handleChange={(e) => setData('category_id', e.target.value)} />
@@ -205,8 +209,8 @@ function Edit({ product, categories, sizes, colors }) {
 
                                     <Input type="file" className="mt-2 block w-full" id="images" handleChange={(e) => handleInputImages(e)} multiple />
 
-                                    {errors.quantity && (
-                                        <ErrorMessage error={errors.images} />
+                                    {errors.quantity || session.images && (
+                                        <ErrorMessage error={errors.images || session.images} />
                                     )}
                                 </div>
 
