@@ -39,4 +39,5 @@ class BrandRequest extends FormRequest
             'status' => 'active',
         ]);
     }
+
 }
